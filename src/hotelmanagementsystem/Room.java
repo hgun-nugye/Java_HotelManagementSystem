@@ -3,7 +3,6 @@ package hotelmanagementsystem;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.*;
-import javax.xml.transform.Result;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

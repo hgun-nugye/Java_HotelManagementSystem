@@ -64,6 +64,7 @@ public class Reception extends JFrame implements ActionListener {
         allEmployees.setForeground(Color.WHITE);
         allEmployees.setBorderPainted(false);
         allEmployees.setOpaque(true);
+        allEmployees.addActionListener(this);
         this.add(allEmployees);
 
         //Button customer infor section
@@ -73,6 +74,7 @@ public class Reception extends JFrame implements ActionListener {
         customers.setForeground(Color.WHITE);
         customers.setBorderPainted(false);
         customers.setOpaque(true);
+        customers.addActionListener(this);
         this.add(customers);
 
         //Button manager infor section
@@ -82,6 +84,7 @@ public class Reception extends JFrame implements ActionListener {
         manager.setForeground(Color.WHITE);
         manager.setBorderPainted(false);
         manager.setOpaque(true);
+        manager.addActionListener(this);
         this.add(manager);
 
         //Button check out section
@@ -128,6 +131,7 @@ public class Reception extends JFrame implements ActionListener {
         searchRoom.setForeground(Color.WHITE);
         searchRoom.setBorderPainted(false);
         searchRoom.setOpaque(true);
+        searchRoom.addActionListener(this);
         this.add(searchRoom);
 
         //Button log out section
@@ -160,17 +164,26 @@ public class Reception extends JFrame implements ActionListener {
         if (event.getActionCommand().equals("New Customer Form")) {
             this.setVisible(false);
             new AddCustomer();
-        }
-        else if (event.getActionCommand().equals("Rooms")) {
+        } else if (event.getActionCommand().equals("Rooms")) {
             this.setVisible(false);
             new Room();
-        }
-        else if (event.getActionCommand().equals("Department")) {
+        } else if (event.getActionCommand().equals("Department")) {
             this.setVisible(false);
             new Department();
-        }
-        else if (event.getActionCommand().equals("Log Out")) {
+
+        } else if (event.getActionCommand().equals("All Employees")) {
             this.setVisible(false);
+            new EmployeeInfor();
+        } else if (event.getActionCommand().equals("Customer Infor")) {
+            this.setVisible(false);
+            new CustomerInfor();
+        } else if (event.getActionCommand().equals("Manager Infor")) {
+            this.setVisible(false);
+            new ManagerInfor();
+        } else if (event.getActionCommand().equals("Search Room")) {
+            this.setVisible(false);
+            new SearchRoom();
         }
+
     }
 }
