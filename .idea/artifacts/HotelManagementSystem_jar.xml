@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="HotelManagementSystem:jar">
+    <output-path>$PROJECT_DIR$/../../../</output-path>
+    <root id="archive" name="HotelManagementSystem.jar">
+      <element id="module-output" name="HotelManagementSystem" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libraries/rs2xml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libraries/mysql-connector-java-8.0.28.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

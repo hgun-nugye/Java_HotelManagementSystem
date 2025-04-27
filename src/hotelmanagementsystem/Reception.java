@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
 
 public class Reception extends JFrame implements ActionListener {
 
@@ -103,6 +102,7 @@ public class Reception extends JFrame implements ActionListener {
         update.setForeground(Color.WHITE);
         update.setBorderPainted(false);
         update.setOpaque(true);
+        update.addActionListener(this);
         this.add(update);
 
 
@@ -183,6 +183,9 @@ public class Reception extends JFrame implements ActionListener {
         } else if (event.getActionCommand().equals("Search Room")) {
             this.setVisible(false);
             new SearchRoom();
+        } else if (event.getSource()==update) {
+            this.setVisible(false);
+            new UpdateCheckout();
         }
 
     }
