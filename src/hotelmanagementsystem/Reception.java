@@ -16,14 +16,13 @@ public class Reception extends JFrame implements ActionListener {
     private final JButton checkout;
     private final JButton update;
     private final JButton roomStatus;
-    private final JButton pickup;
     private final JButton searchRoom;
     private final JButton logOut;
 
     public Reception() {
         this.getContentPane().setBackground(Color.WHITE);
         this.setLayout(null);
-        this.setSize(800, 570);
+        this.setSize(800, 580);
         this.setTitle("Reception");
 
         //Button new Customer section
@@ -38,7 +37,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button new rooms section
         rooms = new JButton("Rooms");
-        rooms.setBounds(10, 70, 200, 30);
+        rooms.setBounds(10, 75, 200, 30);
         rooms.setBackground(Color.BLACK);
         rooms.setForeground(Color.WHITE);
         rooms.setBorderPainted(false);
@@ -48,7 +47,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button new department section
         department = new JButton("Department");
-        department.setBounds(10, 110, 200, 30);
+        department.setBounds(10, 120, 200, 30);
         department.setBackground(Color.BLACK);
         department.setForeground(Color.WHITE);
         department.setBorderPainted(false);
@@ -58,7 +57,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button employees section
         allEmployees = new JButton("All Employees");
-        allEmployees.setBounds(10, 150, 200, 30);
+        allEmployees.setBounds(10, 165, 200, 30);
         allEmployees.setBackground(Color.BLACK);
         allEmployees.setForeground(Color.WHITE);
         allEmployees.setBorderPainted(false);
@@ -68,7 +67,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button customer infor section
         customers = new JButton("Customer Infor");
-        customers.setBounds(10, 190, 200, 30);
+        customers.setBounds(10, 210, 200, 30);
         customers.setBackground(Color.BLACK);
         customers.setForeground(Color.WHITE);
         customers.setBorderPainted(false);
@@ -78,7 +77,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button manager infor section
         manager = new JButton("Manager Infor");
-        manager.setBounds(10, 230, 200, 30);
+        manager.setBounds(10, 255, 200, 30);
         manager.setBackground(Color.BLACK);
         manager.setForeground(Color.WHITE);
         manager.setBorderPainted(false);
@@ -88,16 +87,17 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button check out section
         checkout = new JButton("Check out");
-        checkout.setBounds(10, 270, 200, 30);
+        checkout.setBounds(10, 300, 200, 30);
         checkout.setBackground(Color.BLACK);
         checkout.setForeground(Color.WHITE);
         checkout.setBorderPainted(false);
         checkout.setOpaque(true);
+        checkout.addActionListener(this);
         this.add(checkout);
 
         //Button customer infor section
         update = new JButton("Update Status");
-        update.setBounds(10, 310, 200, 30);
+        update.setBounds(10, 345, 200, 30);
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
         update.setBorderPainted(false);
@@ -108,25 +108,17 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button update room status section
         roomStatus = new JButton("Update Room Status");
-        roomStatus.setBounds(10, 350, 200, 30);
+        roomStatus.setBounds(10, 390, 200, 30);
         roomStatus.setBackground(Color.BLACK);
         roomStatus.setForeground(Color.WHITE);
         roomStatus.setBorderPainted(false);
         roomStatus.setOpaque(true);
+        roomStatus.addActionListener(this);
         this.add(roomStatus);
-
-        //Button pickup service section
-        pickup = new JButton("Pickup Service");
-        pickup.setBounds(10, 390, 200, 30);
-        pickup.setBackground(Color.BLACK);
-        pickup.setForeground(Color.WHITE);
-        pickup.setBorderPainted(false);
-        pickup.setOpaque(true);
-        this.add(pickup);
 
         //Button search room section
         searchRoom = new JButton("Search Room");
-        searchRoom.setBounds(10, 430, 200, 30);
+        searchRoom.setBounds(10, 435, 200, 30);
         searchRoom.setBackground(Color.BLACK);
         searchRoom.setForeground(Color.WHITE);
         searchRoom.setBorderPainted(false);
@@ -136,7 +128,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button log out section
         logOut = new JButton("Log Out");
-        logOut.setBounds(10, 470, 200, 30);
+        logOut.setBounds(10, 480, 200, 30);
         logOut.setBackground(Color.BLACK);
         logOut.setForeground(Color.WHITE);
         logOut.setBorderPainted(false);
@@ -147,7 +139,7 @@ public class Reception extends JFrame implements ActionListener {
         //Image section
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/fourth.jpg"));
         JLabel image = new JLabel(i1);
-        image.setBounds(250, 30, 500, 470);
+        image.setBounds(250, 30, 500, 480);
         this.add(image);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -183,9 +175,19 @@ public class Reception extends JFrame implements ActionListener {
         } else if (event.getActionCommand().equals("Search Room")) {
             this.setVisible(false);
             new SearchRoom();
-        } else if (event.getSource()==update) {
+        } else if (event.getSource() == update) {
             this.setVisible(false);
             new UpdateCheckout();
+        } else if (event.getSource() == roomStatus) {
+            this.setVisible(false);
+            new UpdateRoom();
+        } else if (event.getSource() == checkout) {
+            this.setVisible(false);
+            new Checkout();
+        } else if (event.getSource() == logOut) {
+            this.setVisible(false);
+//            System.exit(0);
+            new Login();
         }
 
     }
