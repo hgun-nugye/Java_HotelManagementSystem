@@ -12,8 +12,8 @@ public class Connect {
     public Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanagementsystem?useSSL=false&serverTimezone=UTC",
-                    "root", "Binh1@KSJ");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanagementsystem?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+                    "root", "1234");
             s = c.createStatement();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Driver not found", e);

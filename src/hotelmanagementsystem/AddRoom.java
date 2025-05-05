@@ -18,7 +18,7 @@ public class AddRoom extends JFrame implements ActionListener {
     public AddRoom() {
         this.setLayout(null);
         this.setTitle("Add Room");
-        this.setSize(940, 470);
+        this.setSize(900, 470);
         this.getContentPane().setBackground(Color.WHITE);
 
         //heading section
@@ -102,9 +102,11 @@ public class AddRoom extends JFrame implements ActionListener {
         this.add(cancel);
 
         //image right
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/twelve.jpg"));
-        JLabel image = new JLabel(i1);
-        image.setBounds(450, 30, 450, 300);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/room.gif"));
+        Image i2 = i1.getImage().getScaledInstance(600, 400, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel image = new JLabel(i3);
+        image.setBounds(450, 80, 700, 300);
         this.add(image);
 
         this.setLocationRelativeTo(null);

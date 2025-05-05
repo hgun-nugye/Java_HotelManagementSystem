@@ -19,11 +19,11 @@ public class Room extends JFrame implements ActionListener {
         this.setTitle("Room");
 
         //Image section
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/eight.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(600, 600, Image.SCALE_DEFAULT);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/department.gif"));
+        Image i2 = i1.getImage().getScaledInstance(1000, 550, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
-        image.setBounds(500, 0, 600, 600);
+        image.setBounds(500, 30, 750, 500);
         this.add(image);
 
         //Heading label section

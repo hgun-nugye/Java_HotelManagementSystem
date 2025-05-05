@@ -105,6 +105,8 @@ public class Login extends JFrame implements ActionListener {
             }
         } else if (event.getSource() == cancel) {
             this.setVisible(false);
+            new Reception();
+//            new HotelManagementSystem();
         }
 
     }

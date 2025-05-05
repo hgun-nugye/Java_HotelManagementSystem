@@ -131,11 +131,11 @@ public class Checkout extends JFrame implements ActionListener {
         this.add(back);
 
         //image section
-        ImageIcon i3 = new ImageIcon(ClassLoader.getSystemResource("icons/sixth.jpg"));
-        Image i4 = i3.getImage().getScaledInstance(400, 250, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(ClassLoader.getSystemResource("icons/checkout.gif"));
+        Image i4 = i3.getImage().getScaledInstance(700, 400, Image.SCALE_DEFAULT);
         ImageIcon i5 = new ImageIcon(i4);
         JLabel image2 = new JLabel(i5);
-        image2.setBounds(400, 50, 400, 250);
+        image2.setBounds(450, 50, 600, 300);
         this.add(image2);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

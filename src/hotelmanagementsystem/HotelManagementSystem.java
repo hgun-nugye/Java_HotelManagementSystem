@@ -15,27 +15,30 @@ public class HotelManagementSystem extends JFrame implements ActionListener {
 //        this.setLayout(null);
 
         //add text title
-        JLabel text = new JLabel("HOTEL MANAGEMENT SYSTEM");
-        Font font = new Font("Monospaced", Font.BOLD, 50);
-        text.setBounds(80, 220, 900, 70);
+        JLabel text = new JLabel("<html>HOTEL <br><br>MANAGEMENT<br> <br>SYSTEM</html>");
+        Font font = new Font("Tahoma", Font.BOLD, 50);
+        text.setBounds(50, 100, 900, 300);
         text.setFont(font);
-        text.setForeground(Color.white);
+        text.setForeground(Color.decode("#4b3808"));
         this.add(text);
 
         //add next button
-        JButton next = new JButton("Next");
-        next.setBounds(650, 400, 150, 50);
-        next.setFont(new Font("serif", Font.BOLD, 25));
-        next.setBackground(Color.white);
-        next.setForeground(Color.BLACK);
+        JButton next = new JButton("Next →");
+        next.setBounds(700, 455, 150, 30);
+        next.setFont(new Font("serif", Font.BOLD, 22));
+        next.setBackground(Color.black);
+        next.setForeground(Color.white);
+        next.setFocusPainted(false);
         next.setBorderPainted(false);
         next.addActionListener(this);
         this.add(next);
 
 
         // Setting up background picture
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/first.jpg"));
-        JLabel image = new JLabel(i1);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/hotel.gif"));
+        Image i2 = i1.getImage().getScaledInstance(900, 545, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel image = new JLabel(i3);
         image.setBounds(0, 0, 900, 545); // Match frame size
         this.add(image);
 
