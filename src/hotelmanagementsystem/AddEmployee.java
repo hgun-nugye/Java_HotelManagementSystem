@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 
 public class AddEmployee extends JFrame implements ActionListener {
     private final JTextField jTextField_name;
@@ -24,40 +23,50 @@ public class AddEmployee extends JFrame implements ActionListener {
         this.getContentPane().setBackground(Color.WHITE);
         this.setTitle("Add Employee");
 
+        //IDNumber section
+        JLabel jLabel_id = new JLabel("Số CCCD");
+        jLabel_id.setBounds(60, 30, 120, 30);
+        jLabel_id.setFont(new Font("Tahoma", Font.BOLD, 17));
+        this.add(jLabel_id);
+
+        jTextField_id = new JTextField();
+        jTextField_id.setBounds(200, 30, 200, 30);
+        this.add(jTextField_id);
+
         //name section
-        JLabel jLabel_name = new JLabel("Name");
-        jLabel_name.setBounds(60, 30, 120, 30);
+        JLabel jLabel_name = new JLabel("Tên");
+        jLabel_name.setBounds(60, 80, 120, 30);
         jLabel_name.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_name);
 
         jTextField_name = new JTextField();
-        jTextField_name.setBounds(200, 30, 200, 30);
+        jTextField_name.setBounds(200, 80, 200, 30);
         this.add(jTextField_name);
 
         //age section
-        JLabel jLabel_age = new JLabel("Age");
-        jLabel_age.setBounds(60, 80, 120, 30);
+        JLabel jLabel_age = new JLabel("Tuổi");
+        jLabel_age.setBounds(60, 130, 120, 30);
         jLabel_age.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_age);
 
         jTextField_age = new JTextField();
-        jTextField_age.setBounds(200, 80, 200, 30);
+        jTextField_age.setBounds(200, 130, 200, 30);
         this.add(jTextField_age);
 
         //gender section
-        JLabel jLabel_gender = new JLabel("Gender");
-        jLabel_gender.setBounds(60, 130, 120, 30);
+        JLabel jLabel_gender = new JLabel("Giới tính");
+        jLabel_gender.setBounds(60, 180, 120, 30);
         jLabel_gender.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_gender);
 
-        rbmale = new JRadioButton("Male");
-        rbmale.setBounds(200, 130, 70, 30);
+        rbmale = new JRadioButton("Nam");
+        rbmale.setBounds(200, 180, 70, 30);
         rbmale.setFont(new Font("Tahoma", Font.PLAIN, 14));
         rbmale.setBackground(Color.WHITE);
         this.add(rbmale);
 
-        rbfemale = new JRadioButton("Female");
-        rbfemale.setBounds(300, 130, 70, 30);
+        rbfemale = new JRadioButton("Nữ");
+        rbfemale.setBounds(300, 180, 70, 30);
         rbfemale.setFont(new Font("Tahoma", Font.PLAIN, 14));
         rbfemale.setBackground(Color.WHITE);
         this.add(rbfemale);
@@ -67,58 +76,48 @@ public class AddEmployee extends JFrame implements ActionListener {
         bg.add(rbfemale);
 
         //job section
-        JLabel jLabel_job = new JLabel("Job");
-        jLabel_job.setBounds(60, 180, 120, 30);
+        JLabel jLabel_job = new JLabel("Chức vụ");
+        jLabel_job.setBounds(60, 230, 120, 30);
         jLabel_job.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_job);
 
-        String str[] = {"Font Desk Clerks", "Porters", " Housekeeping", "Kitchen Staff", "Room Service",
-                "Chefs", "Waiter/Waitress", "Manager", "Accountant"};
+        String str[] = {"Phục vụ", "Buồng phòng", "Bếp", "Bảo vệ",
+                "Kế toán", "Quản lý", "Lễ tân"};
         cbjob = new JComboBox(str);
-        cbjob.setBounds(200, 180, 200, 30);
+        cbjob.setBounds(200, 230, 200, 30);
         cbjob.setBackground(Color.WHITE);
         cbjob.setOpaque(true);
         this.add(cbjob);
 
         //salary section
-        JLabel jLabel_salary = new JLabel("Salary");
-        jLabel_salary.setBounds(60, 230, 120, 30);
+        JLabel jLabel_salary = new JLabel("Lương");
+        jLabel_salary.setBounds(60, 280, 120, 30);
         jLabel_salary.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_salary);
 
         jTextField_salary = new JTextField();
-        jTextField_salary.setBounds(200, 230, 200, 30);
+        jTextField_salary.setBounds(200, 280, 200, 30);
         this.add(jTextField_salary);
 
         //phone section
-        JLabel jLabel_phone = new JLabel("Phone Number");
-        jLabel_phone.setBounds(60, 280, 120, 30);
+        JLabel jLabel_phone = new JLabel("Số điện thoại");
+        jLabel_phone.setBounds(60, 330, 120, 30);
         jLabel_phone.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_phone);
 
         jTextField_phone = new JTextField();
-        jTextField_phone.setBounds(200, 280, 200, 30);
+        jTextField_phone.setBounds(200, 330, 200, 30);
         this.add(jTextField_phone);
 
         //email section
         JLabel jLabel_email = new JLabel("Email");
-        jLabel_email.setBounds(60, 330, 120, 30);
+        jLabel_email.setBounds(60, 380, 120, 30);
         jLabel_email.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_email);
 
         jTextField_email = new JTextField();
-        jTextField_email.setBounds(200, 330, 200, 30);
+        jTextField_email.setBounds(200, 380, 200, 30);
         this.add(jTextField_email);
-
-        //IDNumber section
-        JLabel jLabel_id = new JLabel("ID Number");
-        jLabel_id.setBounds(60, 380, 120, 30);
-        jLabel_id.setFont(new Font("Tahoma", Font.BOLD, 17));
-        this.add(jLabel_id);
-
-        jTextField_id = new JTextField();
-        jTextField_id.setBounds(200, 380, 200, 30);
-        this.add(jTextField_id);
 
         //submit button
         submit = new JButton("SUBMIT");
@@ -169,9 +168,9 @@ public class AddEmployee extends JFrame implements ActionListener {
         }
 
         if (rbmale.isSelected()) {
-            gender = "Male";
+            gender = "Nam";
         } else if (rbfemale.isSelected()) {
-            gender = "Female";
+            gender = "Nữ";
         }
 
         String job = (String) cbjob.getSelectedItem();
@@ -179,13 +178,14 @@ public class AddEmployee extends JFrame implements ActionListener {
         try {
             Connect conn = new Connect();
             String query =
-                    "insert into employee values ('" + name + "','" + age + "', '" + gender + "', '" + job + "'," +
-                            " " + "'" + salary + "', '" + phone + "', '" + email + "', '" + id + "')";
+                    "insert into NhanVien values ('" + id + "','" + name + "', '" + age + "', '" + gender + "'," +
+                            " " + "'" + job + "', '" + salary + "', '" + phone + "', '" + email + "')";
             conn.s.executeUpdate(query);
 
             JOptionPane.showMessageDialog(null, "Employee added successfully");
 
             this.setVisible(false);
+            new Reception();
         } catch (Exception e) {
             e.printStackTrace();
 
