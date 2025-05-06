@@ -1,173 +1,182 @@
 package hotelmanagementsystem;
 
 import javax.swing.*;
-import javax.swing.tree.AbstractLayoutCache;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.sql.ResultSet;
 
 public class AddCustomer extends JFrame implements ActionListener {
-    private final JTextField jTextField_name;
-    private final JComboBox jcomboBoxID;
-    private final JTextField jTextField_number;
+    private final JTextField jTextFieldName;
+    private final JTextField jTextFieldCCCD;
     private final JRadioButton rmale, rfemale;
-    private final JTextField jTextField_country;
-    private final JLabel jLabel_checkinTime;
-    private final JTextField jTextField_deposit;
-    private final JButton add;
-    private final JButton back;
-    private Choice choiceRoom;
+    private final JTextField jTextFieldCountry;
+    private final JTextField jTextFieldDeposit;
+    private final JTextField jTextFieldPhone;
+    private final JTextField jTextFieldEmail;
+    private final JLabel jLabelCheckinTime;
+    private final Choice choiceRoom;
 
-    public AddCustomer() throws HeadlessException {
-        this.setLayout(null);
-        this.setSize(800, 550);
-        this.getContentPane().setBackground(Color.WHITE);
-        this.setTitle("Add Customer");
+    public AddCustomer() {
+        setLayout(null);
+        setSize(800, 550);
+        getContentPane().setBackground(Color.WHITE);
+        setTitle("Add Customer");
 
-        //set heading
-        JLabel text = new JLabel("NEW CUSTOMER FORM");
+        // Set heading
+        JLabel text = new JLabel("KHÁCH HÀNG");
         text.setBounds(100, 20, 300, 30);
         text.setFont(new Font("Tahoma", Font.BOLD, 24));
-        this.add(text);
+        add(text);
 
-        //Id Customer
-        JLabel jLabel_ID = new JLabel("ID");
-        jLabel_ID.setBounds(35, 80, 100, 20);
-        jLabel_ID.setFont(new Font("Tahoma", Font.BOLD, 17));
-        this.add(jLabel_ID);
+        // ID Customer
+        JLabel jLabelCCCD = new JLabel("Số CCCD");
+        jLabelCCCD.setBounds(35, 80, 100, 20);
+        jLabelCCCD.setFont(new Font("Tahoma", Font.BOLD, 17));
+        add(jLabelCCCD);
 
-        String options[] = {"ID Card", "Passport", "Driving License", "Ration Card"};
-        jcomboBoxID = new JComboBox(options);
-        jcomboBoxID.setBounds(200, 80, 150, 25);
-        jcomboBoxID.setBackground(Color.WHITE);
-        this.add(jcomboBoxID);
+        jTextFieldCCCD = new JTextField();
+        jTextFieldCCCD.setBounds(200, 80, 150, 25);
+        add(jTextFieldCCCD);
 
-        //Number phone Customer
-        JLabel jLabel_number = new JLabel("Number");
-        jLabel_number.setBounds(35, 120, 100, 20);
-        jLabel_number.setFont(new Font("Tahoma", Font.BOLD, 17));
-        this.add(jLabel_number);
+        // Name Customer
+        JLabel jLabelName = new JLabel("Tên KH");
+        jLabelName.setBounds(35, 120, 100, 20);
+        jLabelName.setFont(new Font("Tahoma", Font.BOLD, 17));
+        add(jLabelName);
 
-        jTextField_number = new JTextField();
-        jTextField_number.setBounds(200, 120, 150, 25);
-        this.add(jTextField_number);
+        jTextFieldName = new JTextField();
+        jTextFieldName.setBounds(200, 120, 150, 25);
+        add(jTextFieldName);
 
+        // Gender Customer
+        JLabel jLabelGender = new JLabel("Giới tính");
+        jLabelGender.setBounds(35, 160, 100, 20);
+        jLabelGender.setFont(new Font("Tahoma", Font.BOLD, 17));
+        add(jLabelGender);
 
-        //Name Customer
-        JLabel jLabel_name = new JLabel("Name");
-        jLabel_name.setBounds(35, 160, 100, 20);
-        jLabel_name.setFont(new Font("Tahoma", Font.BOLD, 17));
-        this.add(jLabel_name);
-
-        jTextField_name = new JTextField();
-        jTextField_name.setBounds(200, 160, 150, 25);
-        this.add(jTextField_name);
-
-        //gender Customer
-        JLabel jLabel_gender = new JLabel("Gender");
-        jLabel_gender.setBounds(35, 200, 100, 20);
-        jLabel_gender.setFont(new Font("Tahoma", Font.BOLD, 17));
-        this.add(jLabel_gender);
-
-        rmale = new JRadioButton("Male");
+        rmale = new JRadioButton("Nam");
         rmale.setBackground(Color.WHITE);
-        rmale.setBounds(200, 200, 60, 25);
-        this.add(rmale);
+        rmale.setBounds(200, 160, 80, 25);
+        add(rmale);
 
-        rfemale = new JRadioButton("Female");
+        rfemale = new JRadioButton("Nữ");
         rfemale.setBackground(Color.WHITE);
-        rfemale.setBounds(270, 200, 100, 25);
-        this.add(rfemale);
+        rfemale.setBounds(290, 160, 80, 25);
+        add(rfemale);
 
-        //Country Customer
-        JLabel jLabel_country = new JLabel("Country");
-        jLabel_country.setBounds(35, 240, 100, 20);
-        jLabel_country.setFont(new Font("Tahoma", Font.BOLD, 17));
-        this.add(jLabel_country);
+        ButtonGroup genderGroup = new ButtonGroup();
+        genderGroup.add(rmale);
+        genderGroup.add(rfemale);
 
-        jTextField_country = new JTextField();
-        jTextField_country.setBounds(200, 240, 150, 25);
-        this.add(jTextField_country);
+        // Country Customer
+        JLabel jLabelCountry = new JLabel("Quốc tịch");
+        jLabelCountry.setBounds(35, 200, 100, 20);
+        jLabelCountry.setFont(new Font("Tahoma", Font.BOLD, 17));
+        add(jLabelCountry);
 
-        //Room Customer
-        JLabel jLabel_room = new JLabel("Room Number");
-        jLabel_room.setBounds(35, 280, 165, 20);
-        jLabel_room.setFont(new Font("Tahoma", Font.BOLD, 17));
-        this.add(jLabel_room);
+        jTextFieldCountry = new JTextField();
+        jTextFieldCountry.setBounds(200, 200, 150, 25);
+        add(jTextFieldCountry);
+
+        // Email Customer
+        JLabel jLabelEmail = new JLabel("Email");
+        jLabelEmail.setBounds(35, 240, 100, 20);
+        jLabelEmail.setFont(new Font("Tahoma", Font.BOLD, 17));
+        add(jLabelEmail);
+
+        jTextFieldEmail = new JTextField();
+        jTextFieldEmail.setBounds(200, 240, 150, 25);
+        add(jTextFieldEmail);
+
+        // Phone number Customer
+        JLabel jLabelPhone = new JLabel("SĐT");
+        jLabelPhone.setBounds(35, 280, 100, 20);
+        jLabelPhone.setFont(new Font("Tahoma", Font.BOLD, 17));
+        add(jLabelPhone);
+
+        jTextFieldPhone = new JTextField();
+        jTextFieldPhone.setBounds(200, 280, 150, 25);
+        add(jTextFieldPhone);
+
+        // Room Customer
+        JLabel jLabelRoom = new JLabel("Số phòng");
+        jLabelRoom.setBounds(35, 320, 165, 20);
+        jLabelRoom.setFont(new Font("Tahoma", Font.BOLD, 17));
+        add(jLabelRoom);
 
         choiceRoom = new Choice();
         try {
             Connect conn = new Connect();
-            String query = "Select * from room";
+            String query = "SELECT * FROM Phong WHERE TrangThai=N'Trống'";
             ResultSet rs = conn.s.executeQuery(query);
             while (rs.next()) {
-                choiceRoom.add(rs.getString("room_number"));
+                choiceRoom.add(rs.getString("SoPhong"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        choiceRoom.setBounds(200, 280, 150, 25);
-        this.add(choiceRoom);
+        choiceRoom.setBounds(200, 320, 150, 25);
+        add(choiceRoom);
 
-        //Time Customer
-        JLabel jLabel_time = new JLabel("Time");
-        jLabel_time.setBounds(35, 320, 165, 20);
-        jLabel_time.setFont(new Font("Tahoma", Font.BOLD, 17));
-        this.add(jLabel_time);
+        // Time Customer
+        JLabel jLabelTime = new JLabel("Checkin");
+        jLabelTime.setBounds(35, 360, 165, 20);
+        jLabelTime.setFont(new Font("Tahoma", Font.BOLD, 17));
+        add(jLabelTime);
 
         LocalDateTime myDateObj = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         String checkinTime = myDateObj.format(myFormatObj);
 
-        jLabel_checkinTime = new JLabel(checkinTime);
-        jLabel_checkinTime.setBounds(200, 320, 200, 20);
-        jLabel_checkinTime.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        this.add(jLabel_checkinTime);
+        jLabelCheckinTime = new JLabel(checkinTime);
+        jLabelCheckinTime.setBounds(200, 360, 200, 20);
+        jLabelCheckinTime.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        add(jLabelCheckinTime);
 
-        //Deposit Customer
-        JLabel jLabel_deposit = new JLabel("Deposit");
-        jLabel_deposit.setBounds(35, 360, 100, 20);
-        jLabel_deposit.setFont(new Font("Tahoma", Font.BOLD, 17));
-        this.add(jLabel_deposit);
+        // Deposit Customer
+        JLabel jLabelDeposit = new JLabel("Đưa trước");
+        jLabelDeposit.setBounds(35, 400, 100, 20);
+        jLabelDeposit.setFont(new Font("Tahoma", Font.BOLD, 17));
+        add(jLabelDeposit);
 
-        jTextField_deposit = new JTextField();
-        jTextField_deposit.setBounds(200, 360, 150, 25);
-        this.add(jTextField_deposit);
+        jTextFieldDeposit = new JTextField();
+        jTextFieldDeposit.setBounds(200, 400, 150, 25);
+        add(jTextFieldDeposit);
 
-        //Add Button
-        add = new JButton("ADD");
-        add.setBackground(Color.BLACK);
-        add.setForeground(Color.WHITE);
-        add.setBorderPainted(false);
-        add.setBounds(50, 410, 120, 25);
-        add.addActionListener(this);
-        this.add(add);
+        // Add Button
+        JButton addButton = new JButton("ADD");
+        addButton.setBackground(Color.BLACK);
+        addButton.setForeground(Color.WHITE);
+        addButton.setBorderPainted(false);
+        addButton.setBounds(50, 460, 120, 25);
+        addButton.addActionListener(this);
+        add(addButton);
 
-        //Back Button
-        back = new JButton("BACK");
-        back.setBackground(Color.BLACK);
-        back.setForeground(Color.WHITE);
-        back.setBorderPainted(false);
-        back.setBounds(200, 410, 120, 25);
-        back.addActionListener(this);
-        this.add(back);
+        // Back Button
+        JButton backButton = new JButton("BACK");
+        backButton.setBackground(Color.BLACK);
+        backButton.setForeground(Color.WHITE);
+        backButton.setBorderPainted(false);
+        backButton.setBounds(200, 460, 120, 25);
+        backButton.addActionListener(this);
+        add(backButton);
 
-        //Image Section
+        // Image Section
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/customer.gif"));
         Image i2 = i1.getImage().getScaledInstance(650, 380, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
         image.setBounds(400, 50, 600, 380);
-        this.add(image);
+        add(image);
 
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
     }
 
     public static void main(String[] args) {
@@ -177,44 +186,49 @@ public class AddCustomer extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand().equals("ADD")) {
-            String ID = (String) jcomboBoxID.getSelectedItem();
-            String number = jTextField_number.getText();
-            String name = jTextField_name.getText();
-            String gender = null;
-
-            if (rmale.isSelected()) {
-                gender = "Male";
-            } else if (rfemale.isSelected()) {
-                gender = "Female";
-            }
-
-            String country = jTextField_country.getText();
-            String room = choiceRoom.getSelectedItem();
-            String time = jLabel_checkinTime.getText();
-            String deposit = jTextField_deposit.getText();
-
+            String cccd = jTextFieldCCCD.getText();
+            String hoTen = jTextFieldName.getText();
+            String gioiTinh = rmale.isSelected() ? "Nam" : rfemale.isSelected() ? "Nữ" : null;
+            String quocTich = jTextFieldCountry.getText();
+            String email = jTextFieldEmail.getText();
+            String sdt = jTextFieldPhone.getText();
+            String soPhong = choiceRoom.getSelectedItem();
+            String checkin = jLabelCheckinTime.getText();
+            String duaTruoc = jTextFieldDeposit.getText();
 
             try {
-                String query = " insert into customer values ('" + ID + "','" + number + "','" + name +
-                        "' ,'" + gender + "', '" + country + "','" + room + "', '" + time + "','" + deposit + "')";
-                String query2 = "Update room set availability ='Ocupied' where room_number='" + room +
-                        "' ";
+                String query = "INSERT INTO KhachHang VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String query2 = "UPDATE Phong SET TrangThai=N'Đã đặt' WHERE SoPhong=?";
+                String query3 = "INSERT INTO HoaDon VALUES (?, ?, NULL, N'Chưa Thanh toán')";
 
                 Connect conn = new Connect();
-                conn.s.executeUpdate(query);
-                conn.s.executeUpdate(query2);
+                PreparedStatement pstmt = conn.c.prepareStatement(query);
+                pstmt.setString(1, cccd);
+                pstmt.setString(2, hoTen);
+                pstmt.setString(3, gioiTinh);
+                pstmt.setString(4, quocTich);
+                pstmt.setString(5, email);
+                pstmt.setString(6, sdt);
+                pstmt.setString(7, duaTruoc);
+                pstmt.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "New Customer Added Succesfully");
+                PreparedStatement pstmt2 = conn.c.prepareStatement(query2);
+                pstmt2.setString(1, soPhong);
+                pstmt2.executeUpdate();
 
-                this.setVisible(false);
+                PreparedStatement pstmt3 = conn.c.prepareStatement(query3);
+                pstmt3.setString(1, soPhong);
+                pstmt3.setString(2, checkin);
+
+                JOptionPane.showMessageDialog(null, "New Customer Added Successfully");
+                setVisible(false);
                 new Reception();
-
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
                 e.printStackTrace();
-
             }
         } else if (event.getActionCommand().equals("BACK")) {
-            this.setVisible(false);
+            setVisible(false);
             new Reception();
         }
     }
