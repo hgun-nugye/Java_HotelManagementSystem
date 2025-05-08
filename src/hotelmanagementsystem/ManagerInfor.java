@@ -3,6 +3,7 @@ package hotelmanagementsystem;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,52 +15,41 @@ public class ManagerInfor extends JFrame implements ActionListener {
 
     public ManagerInfor() throws HeadlessException {
         this.getContentPane().setBackground(Color.white);
-        this.setSize(1000, 600);
+        this.setSize(1200, 600);
         this.setLayout(null);
         this.setTitle("Manager Information");
 
-        //Heading label section
-        JLabel jLabel_ename = new JLabel("Name");
-        jLabel_ename.setBounds(80, 10, 100, 20);
-        this.add(jLabel_ename);
-
-        JLabel jLabel_eage = new JLabel("Age");
-        jLabel_eage.setBounds(190, 10, 100, 20);
-        this.add(jLabel_eage);
-
-        JLabel jLabel_egender = new JLabel("Gender");
-        jLabel_egender.setBounds(300, 10, 100, 20);
-        this.add(jLabel_egender);
-
-        JLabel jLabel_job = new JLabel("Job");
-        jLabel_job.setBounds(410, 10, 100, 20);
-        this.add(jLabel_job);
-
-        JLabel jLabel_salary = new JLabel("Salary");
-        jLabel_salary.setBounds(530, 10, 100, 20);
-        this.add(jLabel_salary);
-
-        JLabel jLabel_ephone = new JLabel("Phone");
-        jLabel_ephone.setBounds(640, 10, 100, 20);
-        this.add(jLabel_ephone);
-
-        JLabel jLabel_email = new JLabel("Email");
-        jLabel_email.setBounds(760, 10, 100, 20);
-        this.add(jLabel_email);
-
-        JLabel jLabel_ID = new JLabel("ID");
-        jLabel_ID.setBounds(870, 10, 100, 20);
-        this.add(jLabel_ID);
-
         //Table section
         jTable = new JTable();
-        jTable.setBounds(50, 40, 900, 400);
+        jTable.setBounds(50, 20, 900, 450);
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+        jTable.setDefaultRenderer(Object.class, leftRenderer); // Căn trái cho tất cả các ô
+        jTable.setGridColor(Color.GRAY);
+        jTable.setRowHeight(30);
         this.add(jTable);
+
+        JScrollPane scrollPane = new JScrollPane(jTable);
+        scrollPane.setBounds(50, 20, 1100, 450);
+        this.add(scrollPane);
+
 
         try {
             Connect c = new Connect();
-            ResultSet rs = c.s.executeQuery("select * from employee where job= 'Manager'");
+            ResultSet rs = c.s.executeQuery("select * from NhanVien where ChucVu= N'Quản lý'");
             jTable.setModel(DbUtils.resultSetToTableModel(rs));
+            jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+            // Chỉnh kích thước cột
+            jTable.getColumnModel().getColumn(0).setPreferredWidth(100); // Cột CCCD
+            jTable.getColumnModel().getColumn(1).setPreferredWidth(150); // Cột Tên
+            jTable.getColumnModel().getColumn(2).setPreferredWidth(50);  // Cột Tuổi
+            jTable.getColumnModel().getColumn(3).setPreferredWidth(100); // Cột Giới tính
+            jTable.getColumnModel().getColumn(4).setPreferredWidth(100); // Cột Chức vụ
+            jTable.getColumnModel().getColumn(5).setPreferredWidth(100); // Cột Lương
+            jTable.getColumnModel().getColumn(6).setPreferredWidth(100); // Cột Số điện thoại
+            jTable.getColumnModel().getColumn(7).setPreferredWidth(200); // Cột Email
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

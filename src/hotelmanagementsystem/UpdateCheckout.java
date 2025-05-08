@@ -7,50 +7,51 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
 public class UpdateCheckout extends JFrame implements ActionListener {
-    private final Choice choice_customer;
+    private final Choice CCCD;
     private final JTextField tfroom;
     private final JTextField tfname;
-    private final JTextField tfcheckin;
+    private final JLabel jlbcheckin;
     private final JTextField tfpaid;
     private final JTextField tfpending;
     private final JButton update, check, back;
 
-    public UpdateCheckout() throws HeadlessException {
+    public UpdateCheckout() {
         this.getContentPane().setBackground(Color.white);
         this.setSize(980, 500);
         this.setLayout(null);
         this.setTitle("Update Checkout");
 
-        //text heading
-        JLabel text = new JLabel("Update Status");
+        // Text heading
+        JLabel text = new JLabel("CHECK OUT");
         text.setFont(new Font("Tahoma", Font.BOLD, 20));
         text.setBounds(90, 20, 200, 30);
         text.setForeground(Color.BLACK);
         this.add(text);
 
-        //id section
-        JLabel jLabel_id = new JLabel("Customer ID");
+        // Customer ID section
+        JLabel jLabel_id = new JLabel("CCCD");
         jLabel_id.setFont(new Font("Tahoma", Font.BOLD, 12));
         jLabel_id.setBounds(30, 80, 100, 20);
         jLabel_id.setForeground(Color.BLACK);
         this.add(jLabel_id);
 
-        choice_customer = new Choice();
-        choice_customer.setBounds(200, 80, 150, 25);
-        this.add(choice_customer);
+        CCCD = new Choice();
+        CCCD.setBounds(200, 80, 150, 25);
+        this.add(CCCD);
 
+        // Load customer IDs into the choice
         try {
             Connect c = new Connect();
-            ResultSet rs = c.s.executeQuery("select * from customer");
+            ResultSet rs = c.s.executeQuery("SELECT * FROM KhachHang");
             while (rs.next()) {
-                choice_customer.add(rs.getString("number"));
+                CCCD.add(rs.getString("CCCD"));
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace(); // Improved error handling
         }
 
-        //room section
-        JLabel jLabel_room = new JLabel("Room number");
+        // Room section
+        JLabel jLabel_room = new JLabel("Số phòng");
         jLabel_room.setFont(new Font("Tahoma", Font.BOLD, 12));
         jLabel_room.setBounds(30, 120, 120, 20);
         jLabel_room.setForeground(Color.BLACK);
@@ -60,8 +61,8 @@ public class UpdateCheckout extends JFrame implements ActionListener {
         tfroom.setBounds(200, 120, 150, 25);
         this.add(tfroom);
 
-        //name section
-        JLabel jLabel_name = new JLabel("Name");
+        // Name section
+        JLabel jLabel_name = new JLabel("Tên");
         jLabel_name.setFont(new Font("Tahoma", Font.BOLD, 12));
         jLabel_name.setBounds(30, 160, 120, 20);
         jLabel_name.setForeground(Color.BLACK);
@@ -71,19 +72,19 @@ public class UpdateCheckout extends JFrame implements ActionListener {
         tfname.setBounds(200, 160, 150, 25);
         this.add(tfname);
 
-        //checkin section
+        // Check-in section
         JLabel jLabel_checkin = new JLabel("Check in");
         jLabel_checkin.setFont(new Font("Tahoma", Font.BOLD, 12));
         jLabel_checkin.setBounds(30, 200, 120, 20);
         jLabel_checkin.setForeground(Color.BLACK);
         this.add(jLabel_checkin);
 
-        tfcheckin = new JTextField();
-        tfcheckin.setBounds(200, 200, 150, 25);
-        this.add(tfcheckin);
+        jlbcheckin = new JLabel();
+        jlbcheckin.setBounds(200, 200, 150, 25);
+        this.add(jlbcheckin);
 
-        //paid section
-        JLabel jLabel_paid = new JLabel("Amount Paid");
+        // Paid section
+        JLabel jLabel_paid = new JLabel("Đưa trước");
         jLabel_paid.setFont(new Font("Tahoma", Font.BOLD, 12));
         jLabel_paid.setBounds(30, 240, 120, 20);
         jLabel_paid.setForeground(Color.BLACK);
@@ -93,8 +94,8 @@ public class UpdateCheckout extends JFrame implements ActionListener {
         tfpaid.setBounds(200, 240, 150, 25);
         this.add(tfpaid);
 
-        //pending section
-        JLabel jLabel_pending = new JLabel("Amount Pending");
+        // Pending section
+        JLabel jLabel_pending = new JLabel("Còn lại");
         jLabel_pending.setFont(new Font("Tahoma", Font.BOLD, 12));
         jLabel_pending.setBounds(30, 280, 120, 20);
         jLabel_pending.setForeground(Color.BLACK);
@@ -104,7 +105,7 @@ public class UpdateCheckout extends JFrame implements ActionListener {
         tfpending.setBounds(200, 280, 150, 25);
         this.add(tfpending);
 
-        //check Button
+        // Check Button
         check = new JButton("CHECK");
         check.setBackground(Color.BLACK);
         check.setForeground(Color.WHITE);
@@ -113,7 +114,7 @@ public class UpdateCheckout extends JFrame implements ActionListener {
         check.addActionListener(this);
         this.add(check);
 
-        //update Button
+        // Update Button
         update = new JButton("UPDATE");
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
@@ -122,7 +123,7 @@ public class UpdateCheckout extends JFrame implements ActionListener {
         update.addActionListener(this);
         this.add(update);
 
-        //back Button
+        // Back Button
         back = new JButton("BACK");
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
@@ -131,12 +132,11 @@ public class UpdateCheckout extends JFrame implements ActionListener {
         back.addActionListener(this);
         this.add(back);
 
-        //image section
+        // Image section
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/nine.jpg"));
         JLabel image = new JLabel(i1);
         image.setBounds(400, 50, 500, 300);
         this.add(image);
-
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -150,51 +150,50 @@ public class UpdateCheckout extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == check) {
-            String id = choice_customer.getSelectedItem();
-            String query = "select * from customer where number='" + id + "'";
+            String cccd = CCCD.getSelectedItem();
+            String query = "SELECT * FROM KhachHang JOIN HoaDon ON HoaDon.CCCD = KhachHang.CCCD WHERE KhachHang.CCCD='" + cccd + "'";
             try {
                 Connect c = new Connect();
                 ResultSet rs = c.s.executeQuery(query);
                 while (rs.next()) {
-                    tfroom.setText(rs.getString("room"));
-                    tfname.setText(rs.getString("name"));
-                    tfcheckin.setText(rs.getString("checkintime"));
-                    tfpaid.setText(rs.getString("deposit"));
+                    tfroom.setText(rs.getString("HoaDon.SoPhong"));
+                    tfname.setText(rs.getString("KhachHang.HoTen"));
+                    jlbcheckin.setText(rs.getString("HoaDon.NgayNhan"));
+                    tfpaid.setText(rs.getString("KhachHang.DuaTruoc"));
                 }
 
-                ResultSet rs2 =
-                        c.s.executeQuery("select * from room where room_number='" + tfroom.getText() + "'");
+                ResultSet rs2 = c.s.executeQuery("SELECT * FROM Phong WHERE SoPhong='" + tfroom.getText() + "'");
                 while (rs2.next()) {
-                    String price = rs2.getString("price");
-                    int amountPaid = Integer.parseInt(price) - Integer.parseInt(tfpaid.getText());
-                    tfpending.setText(("" + amountPaid));
+                    String price = rs2.getString("GiaMacDinh");
+                    float amountPaid = Float.parseFloat(price) - Float.parseFloat(tfpaid.getText());
+                    tfpending.setText(String.valueOf(amountPaid));
                 }
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                e.printStackTrace(); // Improved error handling
             }
         } else if (event.getSource() == update) {
-            String number = choice_customer.getSelectedItem();
+            String cccd = CCCD.getSelectedItem();
             String room = tfroom.getText();
             String name = tfname.getText();
-            String checkin = tfcheckin.getText();
+            String checkin = jlbcheckin.getText();
             String deposit = tfpaid.getText();
 
             try {
                 Connect c = new Connect();
-                c.s.executeUpdate("update customer set room='" + room + "', name='" + name + "', " +
-                        "checkintime='" + checkin + "', deposit='" + deposit + "'where number='"+number+"'" );
+                c.s.executeUpdate("UPDATE KhachHang SET HoTen='" + name + "', DuaTruoc='" + deposit + "' WHERE CCCD='" + cccd + "'");
+                c.s.executeUpdate("UPDATE HoaDon SET NgayNhan='" + checkin + "' WHERE CCCD='" + cccd + "'");
+                c.s.executeUpdate("UPDATE Phong SET SoPhong='" + room + "' WHERE SoPhong='" + room + "'"); // Adjusted
 
                 JOptionPane.showMessageDialog(null, "Data Updated Successfully");
                 this.setVisible(false);
                 new Reception();
 
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                e.printStackTrace(); // Improved error handling
             }
         } else if (event.getSource() == back) {
             this.setVisible(false);
             new Reception();
         }
-
     }
 }

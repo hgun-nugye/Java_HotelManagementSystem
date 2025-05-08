@@ -21,7 +21,7 @@ public class EmployeeInfor extends JFrame implements ActionListener {
 
         // Table section
         jTable = new JTable();
-        jTable.setBounds(50, 40, 1100, 500);
+        jTable.setBounds(50, 20, 1100, 450);
         jTable.setRowHeight(30);
 
         DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
@@ -30,7 +30,7 @@ public class EmployeeInfor extends JFrame implements ActionListener {
         jTable.setGridColor(Color.GRAY);
 
         JScrollPane scrollPane = new JScrollPane(jTable);
-        scrollPane.setBounds(50, 40, 1100, 400);
+        scrollPane.setBounds(50, 20, 1100, 450);
         this.add(scrollPane); // Thêm JScrollPane vào JFrame thay vì JTable trực tiếp
 
         try {

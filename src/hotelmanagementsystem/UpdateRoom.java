@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
 public class UpdateRoom extends JFrame implements ActionListener {
-    private final Choice choice_customer;
+    private final Choice cccd;
     private final JTextField tfroom;
     private final JButton update, check, back;
     private final JTextField tfavail;
-    private final JTextField tfcleaning;
+//    private final JTextField tfcleaning;
 
     public UpdateRoom() throws HeadlessException {
         this.getContentPane().setBackground(Color.white);
@@ -33,22 +33,22 @@ public class UpdateRoom extends JFrame implements ActionListener {
         jLabel_id.setForeground(Color.BLACK);
         this.add(jLabel_id);
 
-        choice_customer = new Choice();
-        choice_customer.setBounds(200, 80, 150, 25);
-        this.add(choice_customer);
+        cccd = new Choice();
+        cccd.setBounds(200, 80, 150, 25);
+        this.add(cccd);
 
         try {
             Connect c = new Connect();
-            ResultSet rs = c.s.executeQuery("select * from Customer");
+            ResultSet rs = c.s.executeQuery("select * from KhachHang");
             while (rs.next()) {
-                choice_customer.add(rs.getString("number"));
+                cccd.add(rs.getString("CCCD"));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         //room section
-        JLabel jLabel_room = new JLabel("Room number");
+        JLabel jLabel_room = new JLabel("Số phòng");
         jLabel_room.setFont(new Font("Tahoma", Font.BOLD, 12));
         jLabel_room.setBounds(30, 130, 120, 20);
         jLabel_room.setForeground(Color.BLACK);
@@ -59,7 +59,7 @@ public class UpdateRoom extends JFrame implements ActionListener {
         this.add(tfroom);
 
         //availability section
-        JLabel jLabel_avail = new JLabel("Availability");
+        JLabel jLabel_avail = new JLabel("Trạng thái");
         jLabel_avail.setFont(new Font("Tahoma", Font.BOLD, 12));
         jLabel_avail.setBounds(30, 180, 120, 20);
         jLabel_avail.setForeground(Color.BLACK);
@@ -69,16 +69,16 @@ public class UpdateRoom extends JFrame implements ActionListener {
         tfavail.setBounds(200, 180, 150, 25);
         this.add(tfavail);
 
-        //cleaning section
-        JLabel jLabel_cleaning = new JLabel("Cleaning Status");
-        jLabel_cleaning.setFont(new Font("Tahoma", Font.BOLD, 12));
-        jLabel_cleaning.setBounds(30, 230, 120, 20);
-        jLabel_cleaning.setForeground(Color.BLACK);
-        this.add(jLabel_cleaning);
-
-        tfcleaning = new JTextField();
-        tfcleaning.setBounds(200, 230, 150, 25);
-        this.add(tfcleaning);
+//        //cleaning section
+//        JLabel jLabel_cleaning = new JLabel("Cleaning Status");
+//        jLabel_cleaning.setFont(new Font("Tahoma", Font.BOLD, 12));
+//        jLabel_cleaning.setBounds(30, 230, 120, 20);
+//        jLabel_cleaning.setForeground(Color.BLACK);
+//        this.add(jLabel_cleaning);
+//
+//        tfcleaning = new JTextField();
+//        tfcleaning.setBounds(200, 230, 150, 25);
+//        this.add(tfcleaning);
 
 
         //check Button
@@ -129,34 +129,32 @@ public class UpdateRoom extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == check) {
-            String id = choice_customer.getSelectedItem();
-            String query = "select * from customer where number='" + id + "'";
+            String id = cccd.getSelectedItem();
+            String query = "select * from KhachHang join HoaDon on KhachHang.CCCD=HoaDon.CCCD where KhachHang.CCCD='" + id + "'";
             try {
                 Connect c = new Connect();
                 ResultSet rs = c.s.executeQuery(query);
                 while (rs.next()) {
-                    tfroom.setText(rs.getString("room"));
+                    tfroom.setText(rs.getString("SoPhong"));
                 }
 
                 ResultSet rs2 =
-                        c.s.executeQuery("select * from room where room_number='" + tfroom.getText() + "'");
+                        c.s.executeQuery("select * from Phong where SoPhong='" + tfroom.getText() + "'");
                 while (rs2.next()) {
-                    tfavail.setText(rs2.getString("availability"));
-                    tfcleaning.setText(rs2.getString("cleaning_status"));
+                    tfavail.setText(rs2.getString("TrangThai"));
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else if (event.getSource() == update) {
-            String number = choice_customer.getSelectedItem();
+            String id = cccd.getSelectedItem();
             String room = tfroom.getText();
             String available = tfavail.getText();
-            String cleaning = tfcleaning.getText();
+//            String cleaning = tfcleaning.getText();
 
             try {
                 Connect c = new Connect();
-                c.s.executeUpdate("update room set availability='" + available + "', " +
-                        "cleaning_status='" + cleaning + "' where room_number='"+room+"'");
+                c.s.executeUpdate("update Phong set TrangThai='" + available + "'where SoPhong='"+room+"'");
 
                 JOptionPane.showMessageDialog(null, "Data Updated Successfully");
                 this.setVisible(false);

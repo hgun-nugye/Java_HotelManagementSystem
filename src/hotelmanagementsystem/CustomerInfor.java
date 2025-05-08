@@ -21,18 +21,16 @@ public class CustomerInfor extends JFrame implements ActionListener {
 
         // Table section
         jTable = new JTable();
-        jTable.setBounds(40, 40, 900, 400);
-        this.add(jTable);
-
+        jTable.setBounds(50, 20, 900, 450);
         DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
         leftRenderer.setHorizontalAlignment(JLabel.LEFT);
         jTable.setDefaultRenderer(Object.class, leftRenderer); // Căn trái cho tất cả các ô
         jTable.setGridColor(Color.GRAY);
         jTable.setRowHeight(30);
-
+        this.add(jTable);
 
         JScrollPane scrollPane = new JScrollPane(jTable);
-        scrollPane.setBounds(50, 40, 900, 400);
+        scrollPane.setBounds(50, 20, 900, 450);
         this.add(scrollPane);
 
         try {
@@ -44,14 +42,14 @@ public class CustomerInfor extends JFrame implements ActionListener {
             jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
             // Chỉnh kích thước cột
-            jTable.getColumnModel().getColumn(0).setPreferredWidth(80); // Cột CCCD
+            jTable.getColumnModel().getColumn(0).setPreferredWidth(100); // Cột CCCD
             jTable.getColumnModel().getColumn(1).setPreferredWidth(150); // Cột Tên
-            jTable.getColumnModel().getColumn(2).setPreferredWidth(50);  // Cột Giới tính
+            jTable.getColumnModel().getColumn(2).setPreferredWidth(100);  // Cột Giới tính
             jTable.getColumnModel().getColumn(3).setPreferredWidth(100); // Cột Quốc tịch
             jTable.getColumnModel().getColumn(4).setPreferredWidth(100); // Cột Số điện thoại
             jTable.getColumnModel().getColumn(5).setPreferredWidth(50); // Cột Số Phòng
             jTable.getColumnModel().getColumn(6).setPreferredWidth(100); // Cột Ngày nhận
-            jTable.getColumnModel().getColumn(7).setPreferredWidth(50); // Cột Tiền đưa trước
+            jTable.getColumnModel().getColumn(7).setPreferredWidth(100); // Cột Tiền đưa trước
 
 
         } catch (Exception e) {
