@@ -16,6 +16,7 @@ public class AddEmployee extends JFrame implements ActionListener {
     private final JComboBox cbjob;
     private final JButton submit;
     private final JTextField jTextField_id;
+    private final JButton back;
 
     public AddEmployee() {
         this.setLayout(null);
@@ -124,9 +125,18 @@ public class AddEmployee extends JFrame implements ActionListener {
         submit.setBackground(Color.BLACK);
         submit.setForeground(Color.WHITE);
         submit.setBorderPainted(false);
-        submit.setBounds(200, 430, 150, 50);
+        submit.setBounds(70, 430, 150, 30);
         submit.addActionListener(this);
         this.add(submit);
+
+        //back button
+        back = new JButton("BACK");
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        back.setBorderPainted(false);
+        back.setBounds(250, 430, 150, 30);
+        back.addActionListener(this);
+        this.add(back);
 
         //image right
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/employee.gif"));
@@ -149,47 +159,52 @@ public class AddEmployee extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        String name = jTextField_name.getText();
-        String age = jTextField_age.getText();
-        String salary = jTextField_salary.getText();
-        String phone = jTextField_phone.getText();
-        String email = jTextField_email.getText();
-        String id = jTextField_id.getText();
+        if(event.getSource()==submit) {
+            String name = jTextField_name.getText();
+            String age = jTextField_age.getText();
+            String salary = jTextField_salary.getText();
+            String phone = jTextField_phone.getText();
+            String email = jTextField_email.getText();
+            String id = jTextField_id.getText();
 
-        String gender = null;
+            String gender = null;
 
-        if (name.equals("")) {
-            JOptionPane.showMessageDialog(null, "Name should not be empty");
-            return;
-        }
+            if (name.equals("")) {
+                JOptionPane.showMessageDialog(null, "Name should not be empty");
+                return;
+            }
 
-        if (!(email.contains("@") && email.contains(".com"))) {
-            JOptionPane.showMessageDialog(null, "Email is not correct form");
-            return;
-        }
+            if (!(email.contains("@") && email.contains(".com"))) {
+                JOptionPane.showMessageDialog(null, "Email is not correct form");
+                return;
+            }
 
-        if (rbmale.isSelected()) {
-            gender = "Nam";
-        } else if (rbfemale.isSelected()) {
-            gender = "Nữ";
-        }
+            if (rbmale.isSelected()) {
+                gender = "Nam";
+            } else if (rbfemale.isSelected()) {
+                gender = "Nữ";
+            }
 
-        String job = (String) cbjob.getSelectedItem();
+            String job = (String) cbjob.getSelectedItem();
 
-        try {
-            Connect conn = new Connect();
-            String query =
-                    "insert into NhanVien values ('" + id + "','" + name + "', '" + age + "', '" + gender + "'," +
-                            " " + "'" + job + "', '" + salary + "', '" + phone + "', '" + email + "')";
-            conn.s.executeUpdate(query);
+            try {
+                Connect conn = new Connect();
+                String query =
+                        "insert into NhanVien values ('" + id + "','" + name + "', '" + age + "', '" + gender + "'," +
+                                " " + "'" + job + "', '" + salary + "', '" + phone + "', '" + email + "')";
+                conn.s.executeUpdate(query);
 
-            JOptionPane.showMessageDialog(null, "Employee added successfully");
+                JOptionPane.showMessageDialog(null, "Employee added successfully");
 
+                this.setVisible(false);
+                new Reception();
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        }else if(event.getSource()==back){
             this.setVisible(false);
-            new Reception();
-        } catch (Exception e) {
-            e.printStackTrace();
-
+            new Dashboard();
         }
     }
 }

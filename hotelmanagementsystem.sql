@@ -59,7 +59,7 @@ CREATE TABLE KhachHang(
 	QuocTich NVARCHAR(50),
 	Email_KH VARCHAR(100),
     SDT_KH VARCHAR(15), 
-    DuaTruoc DECIMAL(10, 2) 
+    DuaTruoc DECIMAL(10, 2)  default (0)
  );
 INSERT INTO KhachHang (CCCD, SDT_KH, GioiTinh, HoTen, QuocTich, Email_KH)
 VALUES
@@ -97,3 +97,5 @@ VALUES
     ('012345678901', 'P110', '2025-05-03', '2025-05-07', N'Đã thanh toán');
 
 SELECT * FROM HoaDon;
+
+

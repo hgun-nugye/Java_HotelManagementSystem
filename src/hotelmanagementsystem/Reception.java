@@ -9,7 +9,6 @@ public class Reception extends JFrame implements ActionListener {
 
     private final JButton newCustomer;
     private final JButton rooms;
-    private final JButton department;
     private final JButton allEmployees;
     private final JButton customers;
     private final JButton manager;
@@ -18,6 +17,7 @@ public class Reception extends JFrame implements ActionListener {
     private final JButton roomStatus;
     private final JButton searchRoom;
     private final JButton logOut;
+    private final JButton back;
 
     public Reception() {
         this.getContentPane().setBackground(Color.WHITE);
@@ -45,19 +45,9 @@ public class Reception extends JFrame implements ActionListener {
         rooms.addActionListener(this);
         this.add(rooms);
 
-        //Button new department section
-        department = new JButton("Department");
-        department.setBounds(10, 120, 200, 30);
-        department.setBackground(Color.BLACK);
-        department.setForeground(Color.WHITE);
-        department.setBorderPainted(false);
-        department.setOpaque(true);
-        department.addActionListener(this);
-        this.add(department);
-
         //Button employees section
         allEmployees = new JButton("All Employees");
-        allEmployees.setBounds(10, 165, 200, 30);
+        allEmployees.setBounds(10, 120, 200, 30);
         allEmployees.setBackground(Color.BLACK);
         allEmployees.setForeground(Color.WHITE);
         allEmployees.setBorderPainted(false);
@@ -67,7 +57,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button customer infor section
         customers = new JButton("Customer Infor");
-        customers.setBounds(10, 210, 200, 30);
+        customers.setBounds(10, 165, 200, 30);
         customers.setBackground(Color.BLACK);
         customers.setForeground(Color.WHITE);
         customers.setBorderPainted(false);
@@ -77,7 +67,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button manager infor section
         manager = new JButton("Manager Infor");
-        manager.setBounds(10, 255, 200, 30);
+        manager.setBounds(10, 210, 200, 30);
         manager.setBackground(Color.BLACK);
         manager.setForeground(Color.WHITE);
         manager.setBorderPainted(false);
@@ -87,7 +77,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button check out section
         checkout = new JButton("Check out");
-        checkout.setBounds(10, 300, 200, 30);
+        checkout.setBounds(10, 255, 200, 30);
         checkout.setBackground(Color.BLACK);
         checkout.setForeground(Color.WHITE);
         checkout.setBorderPainted(false);
@@ -97,7 +87,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button customer infor section
         update = new JButton("Update Status");
-        update.setBounds(10, 345, 200, 30);
+        update.setBounds(10, 300, 200, 30);
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
         update.setBorderPainted(false);
@@ -108,7 +98,7 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button update room status section
         roomStatus = new JButton("Update Room Status");
-        roomStatus.setBounds(10, 390, 200, 30);
+        roomStatus.setBounds(10, 345, 200, 30);
         roomStatus.setBackground(Color.BLACK);
         roomStatus.setForeground(Color.WHITE);
         roomStatus.setBorderPainted(false);
@@ -118,13 +108,23 @@ public class Reception extends JFrame implements ActionListener {
 
         //Button search room section
         searchRoom = new JButton("Search Room");
-        searchRoom.setBounds(10, 435, 200, 30);
+        searchRoom.setBounds(10, 390, 200, 30);
         searchRoom.setBackground(Color.BLACK);
         searchRoom.setForeground(Color.WHITE);
         searchRoom.setBorderPainted(false);
         searchRoom.setOpaque(true);
         searchRoom.addActionListener(this);
         this.add(searchRoom);
+
+        //Button new department section
+        back = new JButton("Back");
+        back.setBounds(10, 435, 200, 30);
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        back.setBorderPainted(false);
+        back.setOpaque(true);
+        back.addActionListener(this);
+        this.add(back);
 
         //Button log out section
         logOut = new JButton("Log Out");
@@ -135,6 +135,7 @@ public class Reception extends JFrame implements ActionListener {
         logOut.setOpaque(true);
         logOut.addActionListener(this);
         this.add(logOut);
+
 
         //Image section
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/reception.gif"));
@@ -161,10 +162,6 @@ public class Reception extends JFrame implements ActionListener {
         } else if (event.getActionCommand().equals("Rooms")) {
             this.setVisible(false);
             new Room();
-        } else if (event.getActionCommand().equals("Department")) {
-            this.setVisible(false);
-            new Department();
-
         } else if (event.getActionCommand().equals("All Employees")) {
             this.setVisible(false);
             new EmployeeInfor();
@@ -186,10 +183,15 @@ public class Reception extends JFrame implements ActionListener {
         } else if (event.getSource() == checkout) {
             this.setVisible(false);
             new Checkout();
+        } else if (event.getSource() == back) {
+            this.setVisible(false);
+            new Dashboard();
         } else if (event.getSource() == logOut) {
             this.setVisible(false);
-            System.exit(0);
+//            System.exit(0);
+            new HotelManagementSystem();
         }
+
 
     }
 }

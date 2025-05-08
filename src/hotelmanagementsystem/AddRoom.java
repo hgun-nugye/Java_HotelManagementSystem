@@ -110,10 +110,10 @@ public class AddRoom extends JFrame implements ActionListener {
 
         // Image Right
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/room.gif"));
-        Image i2 = i1.getImage().getScaledInstance(600, 400, Image.SCALE_DEFAULT);
+        Image i2 = i1.getImage().getScaledInstance(700, 400, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
-        image.setBounds(450, 80, 400, 300); // Sửa kích thước cho phù hợp
+        image.setBounds(450, 80, 700, 300); // Sửa kích thước cho phù hợp
         this.add(image);
 
         this.setLocationRelativeTo(null);
@@ -163,6 +163,7 @@ public class AddRoom extends JFrame implements ActionListener {
 
         } else {
             this.setVisible(false);
+            new Dashboard();
         }
     }
 }
