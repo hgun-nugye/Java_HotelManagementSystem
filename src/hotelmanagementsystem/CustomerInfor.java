@@ -19,43 +19,21 @@ public class CustomerInfor extends JFrame implements ActionListener {
         this.setLayout(null);
         this.setTitle("Customer Information");
 
-        // Heading label section
-        JLabel jLabel_cnum = new JLabel("CCCD");
-        jLabel_cnum.setBounds(80, 10, 100, 20);
-        this.add(jLabel_cnum);
-
-        JLabel jLabel_cname = new JLabel("Họ tên");
-        jLabel_cname.setBounds(200, 10, 100, 20);
-        this.add(jLabel_cname);
-
-        JLabel jLabel_cgender = new JLabel("Giới tính");
-        jLabel_cgender.setBounds(300, 10, 100, 20);
-        this.add(jLabel_cgender);
-
-        JLabel jLabel_ccountry = new JLabel("Quốc tịch");
-        jLabel_ccountry.setBounds(420, 10, 100, 20);
-        this.add(jLabel_ccountry);
-
-        JLabel jLabel_cphone = new JLabel("Số điện thoại");
-        jLabel_cphone.setBounds(520, 10, 100, 20);
-        this.add(jLabel_cphone);
-
-        JLabel jLabel_croom = new JLabel("Số phòng");
-        jLabel_croom.setBounds(630, 10, 100, 20);
-        this.add(jLabel_croom);
-
-        JLabel jLabel_ccheckin = new JLabel("Checkin");
-        jLabel_ccheckin.setBounds(750, 10, 100, 20);
-        this.add(jLabel_ccheckin);
-
-        JLabel jLabel_cdeposit = new JLabel("Tiền gửi trước");
-        jLabel_cdeposit.setBounds(850, 10, 100, 20);
-        this.add(jLabel_cdeposit);
-
         // Table section
         jTable = new JTable();
         jTable.setBounds(40, 40, 900, 400);
         this.add(jTable);
+
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+        jTable.setDefaultRenderer(Object.class, leftRenderer); // Căn trái cho tất cả các ô
+        jTable.setGridColor(Color.GRAY);
+        jTable.setRowHeight(30);
+
+
+        JScrollPane scrollPane = new JScrollPane(jTable);
+        scrollPane.setBounds(50, 40, 900, 400);
+        this.add(scrollPane);
 
         try {
             Connect c = new Connect();
@@ -64,16 +42,17 @@ public class CustomerInfor extends JFrame implements ActionListener {
                     "join Phong P on P.SoPhong= HD.SoPhong");
             jTable.setModel(DbUtils.resultSetToTableModel(rs));
             jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-            jTable.setRowHeight(30);
-            jTable.setShowVerticalLines(false); // Ẩn đường kẻ dọc
-            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-            centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-            jTable.setGridColor(Color.GRAY); // Đặt màu cho đường kẻ
 
+            // Chỉnh kích thước cột
+            jTable.getColumnModel().getColumn(0).setPreferredWidth(80); // Cột CCCD
+            jTable.getColumnModel().getColumn(1).setPreferredWidth(150); // Cột Tên
+            jTable.getColumnModel().getColumn(2).setPreferredWidth(50);  // Cột Giới tính
+            jTable.getColumnModel().getColumn(3).setPreferredWidth(100); // Cột Quốc tịch
+            jTable.getColumnModel().getColumn(4).setPreferredWidth(100); // Cột Số điện thoại
+            jTable.getColumnModel().getColumn(5).setPreferredWidth(50); // Cột Số Phòng
+            jTable.getColumnModel().getColumn(6).setPreferredWidth(100); // Cột Ngày nhận
+            jTable.getColumnModel().getColumn(7).setPreferredWidth(50); // Cột Tiền đưa trước
 
-            for (int i = 0; i < jTable.getColumnCount(); i++) {
-                jTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
