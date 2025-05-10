@@ -139,11 +139,11 @@ public class AddEmployee extends JFrame implements ActionListener {
         this.add(back);
 
         //image right
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/employee.gif"));
-        Image i2 = i1.getImage().getScaledInstance(660, 500, Image.SCALE_DEFAULT);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/employee.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
-        image.setBounds(450, 50, 660, 400);
+        image.setBounds(300, 50, 660, 400);
         this.add(image);
 
 

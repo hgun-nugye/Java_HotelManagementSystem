@@ -166,11 +166,11 @@ public class AddCustomer extends JFrame implements ActionListener {
         add(backButton);
 
         // Image Section
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/customer.gif"));
-        Image i2 = i1.getImage().getScaledInstance(650, 380, Image.SCALE_DEFAULT);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/customer.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(470, 400, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
-        image.setBounds(400, 50, 600, 380);
+        image.setBounds(300, 50, 600, 400);
         add(image);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

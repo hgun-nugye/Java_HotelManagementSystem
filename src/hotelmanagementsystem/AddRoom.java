@@ -30,7 +30,7 @@ public class AddRoom extends JFrame implements ActionListener {
         // Room Section
         JLabel jLabel_room_num = new JLabel("Số phòng");
         jLabel_room_num.setFont(new Font("Tahoma", Font.BOLD, 15));
-        jLabel_room_num.setBounds(60, 80, 120, 30);
+        jLabel_room_num.setBounds(40, 80, 120, 30);
         this.add(jLabel_room_num);
 
         jTextField_room_num = new JTextField();
@@ -40,7 +40,7 @@ public class AddRoom extends JFrame implements ActionListener {
         // Status Room Section
         JLabel jLabel_avaliable = new JLabel("Trạng thái");
         jLabel_avaliable.setFont(new Font("Tahoma", Font.BOLD, 15));
-        jLabel_avaliable.setBounds(60, 130, 120, 30);
+        jLabel_avaliable.setBounds(40, 130, 120, 30);
         this.add(jLabel_avaliable);
 
         String availableOptions[] = {"Trống", "Đã đặt", "Đang dọn dẹp"};
@@ -52,7 +52,7 @@ public class AddRoom extends JFrame implements ActionListener {
         // Type Bed Section
         JLabel jLabel_bed = new JLabel("Số giường");
         jLabel_bed.setFont(new Font("Tahoma", Font.BOLD, 15));
-        jLabel_bed.setBounds(60, 180, 120, 30);
+        jLabel_bed.setBounds(40, 180, 120, 30);
         this.add(jLabel_bed);
 
         jTextField_bed = new JTextField();
@@ -62,7 +62,7 @@ public class AddRoom extends JFrame implements ActionListener {
         // Price Section
         JLabel jLabel_price = new JLabel("Giá phòng");
         jLabel_price.setFont(new Font("Tahoma", Font.BOLD, 15));
-        jLabel_price.setBounds(60, 230, 120, 30);
+        jLabel_price.setBounds(40, 230, 120, 30);
         this.add(jLabel_price);
 
         jTextField_price = new JTextField();
@@ -72,7 +72,7 @@ public class AddRoom extends JFrame implements ActionListener {
         // Amenities Section
         JLabel jLabel_type = new JLabel("Tiện nghi");
         jLabel_type.setFont(new Font("Tahoma", Font.BOLD, 15));
-        jLabel_type.setBounds(60, 280, 120, 30);
+        jLabel_type.setBounds(40, 280, 120, 30);
         this.add(jLabel_type);
 
         JPanel amenitiesPanel = new JPanel();
@@ -95,7 +95,7 @@ public class AddRoom extends JFrame implements ActionListener {
         add.setForeground(Color.WHITE);
         add.setBackground(Color.BLACK);
         add.setBorderPainted(false);
-        add.setBounds(60, 400, 130, 30);
+        add.setBounds(40, 400, 130, 30);
         add.addActionListener(this);
         this.add(add);
 
@@ -109,11 +109,11 @@ public class AddRoom extends JFrame implements ActionListener {
         this.add(cancel);
 
         // Image Right
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/room.gif"));
-        Image i2 = i1.getImage().getScaledInstance(700, 400, Image.SCALE_DEFAULT);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/room.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(700, 700, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
-        image.setBounds(450, 80, 700, 300); // Sửa kích thước cho phù hợp
+        image.setBounds(430, 80, 600, 300);
         this.add(image);
 
         this.setLocationRelativeTo(null);
@@ -155,7 +155,7 @@ public class AddRoom extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "New Room Added Successfully!");
 
                 this.setVisible(false);
-                new Reception();
+                new Dashboard();
 
             } catch (Exception exception) {
                 exception.printStackTrace();

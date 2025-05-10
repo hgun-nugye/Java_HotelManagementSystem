@@ -17,7 +17,7 @@ public class UpdateCheckout extends JFrame implements ActionListener {
 
     public UpdateCheckout() {
         this.getContentPane().setBackground(Color.white);
-        this.setSize(980, 500);
+        this.setSize(950, 500);
         this.setLayout(null);
         this.setTitle("Update Checkout");
 

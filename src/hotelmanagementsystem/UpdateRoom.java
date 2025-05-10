@@ -11,6 +11,7 @@ public class UpdateRoom extends JFrame implements ActionListener {
     private final JTextField tfroom;
     private final JButton update, check, back;
     private final JTextField tfavail;
+    private final JTextField tfbed;
 //    private final JTextField tfcleaning;
 
     public UpdateRoom() throws HeadlessException {
@@ -20,14 +21,14 @@ public class UpdateRoom extends JFrame implements ActionListener {
         this.setTitle("Update Room");
 
         //text heading
-        JLabel text = new JLabel("Update Room Status");
+        JLabel text = new JLabel("Cập nhật trạng thái phòng");
         text.setFont(new Font("Tahoma", Font.BOLD, 25));
-        text.setBounds(90, 20, 300, 30);
+        text.setBounds(30, 20, 500, 30);
         text.setForeground(Color.BLACK);
         this.add(text);
 
         //id section
-        JLabel jLabel_id = new JLabel("Customer ID");
+        JLabel jLabel_id = new JLabel("CCCD");
         jLabel_id.setFont(new Font("Tahoma", Font.BOLD, 12));
         jLabel_id.setBounds(30, 80, 100, 20);
         jLabel_id.setForeground(Color.BLACK);
@@ -58,6 +59,17 @@ public class UpdateRoom extends JFrame implements ActionListener {
         tfroom.setBounds(200, 130, 150, 25);
         this.add(tfroom);
 
+        //bed section
+        JLabel jLabel_bed = new JLabel("Số giường");
+        jLabel_bed.setFont(new Font("Tahoma", Font.BOLD, 12));
+        jLabel_bed.setBounds(30, 230, 120, 20);
+        jLabel_bed.setForeground(Color.BLACK);
+        this.add(jLabel_bed);
+
+        tfbed = new JTextField();
+        tfbed.setBounds(200, 230, 150, 25);
+        this.add(tfbed);
+
         //availability section
         JLabel jLabel_avail = new JLabel("Trạng thái");
         jLabel_avail.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -68,18 +80,6 @@ public class UpdateRoom extends JFrame implements ActionListener {
         tfavail = new JTextField();
         tfavail.setBounds(200, 180, 150, 25);
         this.add(tfavail);
-
-//        //cleaning section
-//        JLabel jLabel_cleaning = new JLabel("Cleaning Status");
-//        jLabel_cleaning.setFont(new Font("Tahoma", Font.BOLD, 12));
-//        jLabel_cleaning.setBounds(30, 230, 120, 20);
-//        jLabel_cleaning.setForeground(Color.BLACK);
-//        this.add(jLabel_cleaning);
-//
-//        tfcleaning = new JTextField();
-//        tfcleaning.setBounds(200, 230, 150, 25);
-//        this.add(tfcleaning);
-
 
         //check Button
         check = new JButton("CHECK");
@@ -142,16 +142,14 @@ public class UpdateRoom extends JFrame implements ActionListener {
                         c.s.executeQuery("select * from Phong where SoPhong='" + tfroom.getText() + "'");
                 while (rs2.next()) {
                     tfavail.setText(rs2.getString("TrangThai"));
+                    tfbed.setText(rs2.getString("SoGiuong"));
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else if (event.getSource() == update) {
-            String id = cccd.getSelectedItem();
             String room = tfroom.getText();
             String available = tfavail.getText();
-//            String cleaning = tfcleaning.getText();
-
             try {
                 Connect c = new Connect();
                 c.s.executeUpdate("update Phong set TrangThai='" + available + "'where SoPhong='"+room+"'");
