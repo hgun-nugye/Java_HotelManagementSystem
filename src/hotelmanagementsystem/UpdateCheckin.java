@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
-public class UpdateCheckout extends JFrame implements ActionListener {
+public class UpdateCheckin extends JFrame implements ActionListener {
     private final Choice CCCD;
     private final JTextField tfroom;
     private final JTextField tfname;
@@ -15,16 +15,16 @@ public class UpdateCheckout extends JFrame implements ActionListener {
     private final JTextField tfpending;
     private final JButton update, check, back;
 
-    public UpdateCheckout() {
+    public UpdateCheckin() {
         this.getContentPane().setBackground(Color.white);
         this.setSize(950, 500);
         this.setLayout(null);
         this.setTitle("Update Checkout");
 
         // Text heading
-        JLabel text = new JLabel("CHECK OUT");
+        JLabel text = new JLabel("CẬP NHẬT CHECKIN");
         text.setFont(new Font("Tahoma", Font.BOLD, 20));
-        text.setBounds(90, 20, 200, 30);
+        text.setBounds(50, 20, 250, 30);
         text.setForeground(Color.BLACK);
         this.add(text);
 
@@ -73,7 +73,7 @@ public class UpdateCheckout extends JFrame implements ActionListener {
         this.add(tfname);
 
         // Check-in section
-        JLabel jLabel_checkin = new JLabel("Check in");
+        JLabel jLabel_checkin = new JLabel("Nhận phòng");
         jLabel_checkin.setFont(new Font("Tahoma", Font.BOLD, 12));
         jLabel_checkin.setBounds(30, 200, 120, 20);
         jLabel_checkin.setForeground(Color.BLACK);
@@ -144,7 +144,8 @@ public class UpdateCheckout extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new UpdateCheckout();
+        new UpdateCheckin();
+
     }
 
     @Override
@@ -164,8 +165,8 @@ public class UpdateCheckout extends JFrame implements ActionListener {
 
                 ResultSet rs2 = c.s.executeQuery("SELECT * FROM Phong WHERE SoPhong='" + tfroom.getText() + "'");
                 while (rs2.next()) {
-                    String price = rs2.getString("GiaMacDinh");
-                    float amountPaid = Float.parseFloat(price) - Float.parseFloat(tfpaid.getText());
+                    String price = rs2.getString("Phong.GiaMacDinh");
+                    float amountPaid = Integer.parseInt(price) - Integer.parseInt(tfpaid.getText());
                     tfpending.setText(String.valueOf(amountPaid));
                 }
             } catch (Exception e) {
@@ -182,14 +183,14 @@ public class UpdateCheckout extends JFrame implements ActionListener {
                 Connect c = new Connect();
                 c.s.executeUpdate("UPDATE KhachHang SET HoTen='" + name + "', DuaTruoc='" + deposit + "' WHERE CCCD='" + cccd + "'");
                 c.s.executeUpdate("UPDATE HoaDon SET NgayNhan='" + checkin + "' WHERE CCCD='" + cccd + "'");
-                c.s.executeUpdate("UPDATE Phong SET SoPhong='" + room + "' WHERE SoPhong='" + room + "'"); // Adjusted
+                c.s.executeUpdate("UPDATE Phong SET SoPhong='" + room + "' WHERE SoPhong='" + room + "'");
 
                 JOptionPane.showMessageDialog(null, "Data Updated Successfully");
                 this.setVisible(false);
                 new Reception();
 
             } catch (Exception e) {
-                e.printStackTrace(); // Improved error handling
+                e.printStackTrace();
             }
         } else if (event.getSource() == back) {
             this.setVisible(false);

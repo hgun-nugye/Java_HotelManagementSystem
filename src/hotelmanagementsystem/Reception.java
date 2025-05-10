@@ -26,7 +26,7 @@ public class Reception extends JFrame implements ActionListener {
         this.setTitle("Reception");
 
         //Button new Customer section
-        newCustomer = new JButton("New Customer Form");
+        newCustomer = new JButton("Thêm Khách hàng");
         newCustomer.setBounds(30, 30, 200, 30);
         newCustomer.setBackground(Color.BLACK);
         newCustomer.setForeground(Color.WHITE);
@@ -37,7 +37,7 @@ public class Reception extends JFrame implements ActionListener {
         this.add(newCustomer);
 
         //Button new rooms section
-        rooms = new JButton("Rooms");
+        rooms = new JButton("Danh sách Phòng");
         rooms.setBounds(30, 75, 200, 30);
         rooms.setBackground(Color.BLACK);
         rooms.setForeground(Color.WHITE);
@@ -48,7 +48,7 @@ public class Reception extends JFrame implements ActionListener {
         this.add(rooms);
 
         //Button employees section
-        allEmployees = new JButton("All Employees");
+        allEmployees = new JButton("Danh sách Nhân viên");
         allEmployees.setBounds(30, 120, 200, 30);
         allEmployees.setBackground(Color.BLACK);
         allEmployees.setForeground(Color.WHITE);
@@ -59,7 +59,7 @@ public class Reception extends JFrame implements ActionListener {
         this.add(allEmployees);
 
         //Button customer infor section
-        customers = new JButton("Customer Infor");
+        customers = new JButton("Danh sách Khách Hàng");
         customers.setBounds(30, 165, 200, 30);
         customers.setBackground(Color.BLACK);
         customers.setForeground(Color.WHITE);
@@ -70,7 +70,7 @@ public class Reception extends JFrame implements ActionListener {
         this.add(customers);
 
         //Button manager infor section
-        manager = new JButton("Manager Infor");
+        manager = new JButton("Thông tin Quản lý");
         manager.setBounds(30, 210, 200, 30);
         manager.setBackground(Color.BLACK);
         manager.setForeground(Color.WHITE);
@@ -92,7 +92,7 @@ public class Reception extends JFrame implements ActionListener {
         this.add(checkout);
 
         //Button customer infor section
-        update = new JButton("Update Status");
+        update = new JButton("Cập nhật Trạng thái");
         update.setBounds(30, 300, 200, 30);
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
@@ -104,7 +104,7 @@ public class Reception extends JFrame implements ActionListener {
 
 
         //Button update room status section
-        roomStatus = new JButton("Update Room Status");
+        roomStatus = new JButton("Cập nhật Phòng");
         roomStatus.setBounds(30, 345, 200, 30);
         roomStatus.setBackground(Color.BLACK);
         roomStatus.setForeground(Color.WHITE);
@@ -115,7 +115,7 @@ public class Reception extends JFrame implements ActionListener {
         this.add(roomStatus);
 
         //Button search room section
-        searchRoom = new JButton("Search Room");
+        searchRoom = new JButton("Tìm phòng");
         searchRoom.setBounds(30, 390, 200, 30);
         searchRoom.setBackground(Color.BLACK);
         searchRoom.setForeground(Color.WHITE);
@@ -187,7 +187,7 @@ public class Reception extends JFrame implements ActionListener {
             new SearchRoom();
         } else if (event.getSource() == update) {
             this.setVisible(false);
-            new UpdateCheckout();
+            new UpdateCheckin();
         } else if (event.getSource() == roomStatus) {
             this.setVisible(false);
             new UpdateRoom();

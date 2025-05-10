@@ -25,8 +25,8 @@ public class Checkout extends JFrame implements ActionListener {
 
         // Text Heading
         JLabel text = new JLabel("CHECKOUT");
-        text.setBounds(100, 20, 100, 30);
-        text.setForeground(Color.BLACK);
+        text.setBounds(100, 20, 150, 30);
+        text.setForeground(Color.red);
         text.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.add(text);
 
@@ -52,7 +52,7 @@ public class Checkout extends JFrame implements ActionListener {
         this.add(tick);
 
         // Room Number Section
-        JLabel jLabel_room = new JLabel("Room Number");
+        JLabel jLabel_room = new JLabel("Số phòng");
         jLabel_room.setBounds(30, 130, 150, 30);
         jLabel_room.setForeground(Color.BLACK);
         jLabel_room.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -65,7 +65,7 @@ public class Checkout extends JFrame implements ActionListener {
         this.add(jtext_room);
 
         // Check-in Section
-        JLabel jLabel_checkin = new JLabel("Checkin Time");
+        JLabel jLabel_checkin = new JLabel("Nhận phòng");
         jLabel_checkin.setBounds(30, 180, 150, 30);
         jLabel_checkin.setForeground(Color.BLACK);
         jLabel_checkin.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -78,7 +78,7 @@ public class Checkout extends JFrame implements ActionListener {
         this.add(jtext_checkin);
 
         // Checkout Section
-        JLabel jLabel_checkout = new JLabel("Checkout Time");
+        JLabel jLabel_checkout = new JLabel("Trả phòng");
         jLabel_checkout.setBounds(30, 230, 150, 30);
         jLabel_checkout.setForeground(Color.BLACK);
         jLabel_checkout.setFont(new Font("Tahoma", Font.BOLD, 15));

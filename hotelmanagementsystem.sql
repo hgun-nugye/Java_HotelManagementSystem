@@ -34,21 +34,21 @@ select * from NhanVien;
     SoGiuong INT NOT NULL,
 	TienNghi NVARCHAR(100) NOT NULL,
 	TrangThai NVARCHAR(50) NOT NULL,
-	GiaMacDinh DECIMAL(10, 2) NOT NULL
+	GiaMacDinh INT NOT NULL
  );
 
 INSERT INTO Phong (SoPhong, SoGiuong, TienNghi, TrangThai, GiaMacDinh)
 VALUES
-    ('101', 2, N'Điều hòa, Wifi, Tivi', N'Trống', 500000.00),
-    ('102', 1, N'Điều hòa, Wifi', N'Trống', 300000.00),
-    ('103', 3, N'Điều hòa, Wifi, Tivi, Tủ lạnh', N'Trống', 700000.00),
-    ('104', 2, N'Wifi, Tivi', N'Đã đặt', 600000.00),
-    ('105', 1, N'Điều hòa', N'Trống', 400000.00),
-    ('106', 2, N'Điều hòa, Wifi', N'Trống', 450000.00),
-    ('107', 3, N'Điều hòa, Wifi, Tivi', N'Trống', 750000.00),
-    ('108', 1, N'Wifi', N'Đã đặt', 350000.00),
-    ('109', 2, N'Điều hòa, Tủ lạnh', N'Trống', 550000.00),
-    ('110', 1, N'Điều hòa, Wifi, Tivi', N'Trống', 600000.00);
+    ('101', 2, N'Điều hòa, Wifi, Tivi', N'Trống', 500000),
+    ('102', 1, N'Điều hòa, Wifi', N'Trống', 300000),
+    ('103', 3, N'Điều hòa, Wifi, Tivi, Tủ lạnh', N'Trống', 700000),
+    ('104', 2, N'Wifi, Tivi', N'Đã đặt', 600000),
+    ('105', 1, N'Điều hòa', N'Trống', 400000),
+    ('106', 2, N'Điều hòa, Wifi', N'Trống', 450000),
+    ('107', 3, N'Điều hòa, Wifi, Tivi', N'Trống', 750000),
+    ('108', 1, N'Wifi', N'Đã đặt', 350000),
+    ('109', 2, N'Điều hòa, Tủ lạnh', N'Trống', 550000),
+    ('110', 1, N'Điều hòa, Wifi, Tivi', N'Trống', 600000);
     
 select * from Phong where TrangThai=N'Trống';
 
@@ -59,7 +59,7 @@ CREATE TABLE KhachHang(
 	QuocTich NVARCHAR(50),
 	Email_KH VARCHAR(100),
     SDT_KH VARCHAR(15), 
-    DuaTruoc DECIMAL(10, 2)  default (0)
+    DuaTruoc INT  default (0)
  );
 INSERT INTO KhachHang (CCCD, SDT_KH, GioiTinh, HoTen, QuocTich, Email_KH)
 VALUES
