@@ -69,10 +69,6 @@ public class ManagerInfor extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new ManagerInfor();
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
         this.setVisible(false);

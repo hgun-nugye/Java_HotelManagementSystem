@@ -122,10 +122,6 @@ public class UpdateRoom extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new UpdateRoom();
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == check) {
@@ -152,7 +148,7 @@ public class UpdateRoom extends JFrame implements ActionListener {
             String available = tfavail.getText();
             try {
                 Connect c = new Connect();
-                c.s.executeUpdate("update Phong set TrangThai='" + available + "'where SoPhong='"+room+"'");
+                c.s.executeUpdate("update Phong set TrangThai='" + available + "'where SoPhong='" + room + "'");
 
                 JOptionPane.showMessageDialog(null, "Data Updated Successfully");
                 this.setVisible(false);

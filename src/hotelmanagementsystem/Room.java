@@ -73,10 +73,6 @@ public class Room extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new Room();
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
         this.setVisible(false);

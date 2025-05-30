@@ -59,7 +59,7 @@ public class Reception extends JFrame implements ActionListener {
         this.add(allEmployees);
 
         //Button customer infor section
-        customers = new JButton("Danh sách Khách Hàng");
+        customers = new JButton("Danh sách Khách hàng");
         customers.setBounds(30, 165, 200, 30);
         customers.setBackground(Color.BLACK);
         customers.setForeground(Color.WHITE);
@@ -92,7 +92,7 @@ public class Reception extends JFrame implements ActionListener {
         this.add(checkout);
 
         //Button customer infor section
-        update = new JButton("Cập nhật Trạng thái");
+        update = new JButton("Cập nhật Checkin");
         update.setBounds(30, 300, 200, 30);
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
@@ -161,48 +161,41 @@ public class Reception extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new Reception();
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getActionCommand().equals("New Customer Form")) {
-            this.setVisible(false);
+        if (event.getSource() == newCustomer) {
+            this.dispose();
             new AddCustomer();
-        } else if (event.getActionCommand().equals("Rooms")) {
-            this.setVisible(false);
+        } else if (event.getSource() == rooms) {
+            this.dispose();
             new Room();
-        } else if (event.getActionCommand().equals("All Employees")) {
-            this.setVisible(false);
+        } else if (event.getSource() == allEmployees) {
+            this.dispose();
             new EmployeeInfor();
-        } else if (event.getActionCommand().equals("Customer Infor")) {
-            this.setVisible(false);
+        } else if (event.getSource() == customers) {
+            this.dispose();
             new CustomerInfor();
-        } else if (event.getActionCommand().equals("Manager Infor")) {
-            this.setVisible(false);
+        } else if (event.getSource() == manager) {
+            this.dispose();
             new ManagerInfor();
-        } else if (event.getActionCommand().equals("Search Room")) {
-            this.setVisible(false);
+        } else if (event.getSource() == searchRoom) {
+            this.dispose();
             new SearchRoom();
         } else if (event.getSource() == update) {
-            this.setVisible(false);
+            this.dispose();
             new UpdateCheckin();
         } else if (event.getSource() == roomStatus) {
-            this.setVisible(false);
+            this.dispose();
             new UpdateRoom();
         } else if (event.getSource() == checkout) {
-            this.setVisible(false);
+            this.dispose();
             new Checkout();
         } else if (event.getSource() == back) {
-            this.setVisible(false);
+            this.dispose();
             new Dashboard();
         } else if (event.getSource() == logOut) {
-            this.setVisible(false);
-//            System.exit(0);
+            this.dispose();
             new HotelManagementSystem();
         }
-
-
     }
 }

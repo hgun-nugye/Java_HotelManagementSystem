@@ -179,10 +179,6 @@ public class AddCustomer extends JFrame implements ActionListener {
         setResizable(false);
     }
 
-    public static void main(String[] args) {
-        new AddCustomer();
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand().equals("ADD")) {
@@ -199,7 +195,7 @@ public class AddCustomer extends JFrame implements ActionListener {
             try {
                 String query = "INSERT INTO KhachHang VALUES (?, ?, ?, ?, ?, ?, ?)";
                 String query2 = "UPDATE Phong SET TrangThai=N'Đã đặt' WHERE SoPhong=?";
-                String query3 = "INSERT INTO HoaDon VALUES (?, ?, NULL, N'Chưa Thanh toán')";
+                String query3 = "INSERT INTO HoaDon VALUES (GenerateMaHD(),?,?, ?, NULL, N'Chưa Thanh toán')";
 
                 Connect conn = new Connect();
                 PreparedStatement pstmt = conn.c.prepareStatement(query);
@@ -217,8 +213,9 @@ public class AddCustomer extends JFrame implements ActionListener {
                 pstmt2.executeUpdate();
 
                 PreparedStatement pstmt3 = conn.c.prepareStatement(query3);
-                pstmt3.setString(1, soPhong);
-                pstmt3.setString(2, checkin);
+                pstmt2.setString(1, cccd);
+                pstmt3.setString(2, soPhong);
+                pstmt3.setString(3, checkin);
 
                 JOptionPane.showMessageDialog(null, "New Customer Added Successfully");
                 setVisible(false);

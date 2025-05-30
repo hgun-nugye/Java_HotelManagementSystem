@@ -20,10 +20,10 @@ public class Dashboard extends JFrame implements ActionListener {
 
         //set background image
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/dashboard.png"));
-        Image i2 = i1.getImage().getScaledInstance(1500, 900, Image.SCALE_DEFAULT);
+        Image i2 = i1.getImage().getScaledInstance(1900, 900, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
-        image.setBounds(-320, 0, 1900, 900);
+        image.setBounds(-200, 0, 1900, 900);
         this.add(image);
 
         //menu bar
@@ -61,11 +61,6 @@ public class Dashboard extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
-    }
-
-
-    public static void main(String[] args) {
-        new Dashboard();
     }
 
     @Override

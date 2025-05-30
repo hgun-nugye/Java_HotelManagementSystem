@@ -162,23 +162,15 @@ public class Checkout extends JFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        new Checkout();
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == checkout) {
             String selectedCCCD = CCCD.getSelectedItem();
-            String queryDelete = "DELETE FROM KhachHang WHERE CCCD = ?";
             String queryUpdateRoom = "UPDATE Phong SET TrangThai='Trống' WHERE SoPhong = ?";
             String queryUpdateBill = "UPDATE HoaDon SET NgayTra=? WHERE SoPhong = ?";
 
             try {
                 Connect c = new Connect();
-                PreparedStatement pstmtDelete = c.c.prepareStatement(queryDelete);
-                pstmtDelete.setString(1, selectedCCCD);
-                pstmtDelete.executeUpdate();
 
                 PreparedStatement pstmtUpdateRoom = c.c.prepareStatement(queryUpdateRoom);
                 pstmtUpdateRoom.setString(1, jtext_room.getText());

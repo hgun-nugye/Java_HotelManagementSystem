@@ -153,10 +153,6 @@ public class AddEmployee extends JFrame implements ActionListener {
         this.setResizable(false);
     }
 
-    public static void main(String[] args) {
-        new AddEmployee();
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
         if(event.getSource()==submit) {
@@ -197,7 +193,7 @@ public class AddEmployee extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Employee added successfully");
 
                 this.setVisible(false);
-                new Reception();
+                new Dashboard();
             } catch (Exception e) {
                 e.printStackTrace();
 

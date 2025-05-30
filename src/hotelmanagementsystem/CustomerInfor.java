@@ -72,10 +72,6 @@ public class CustomerInfor extends JFrame implements ActionListener {
         this.setResizable(false);
     }
 
-    public static void main(String[] args) {
-        new CustomerInfor();
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
         this.setVisible(false);

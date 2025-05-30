@@ -5,7 +5,7 @@ insert into login values("admin", "1234");
 select * from login;
 
 CREATE TABLE NhanVien(
-	CCCD VARCHAR(50) ,
+	CCCD VARCHAR(50) primary key,
 	HoTen NVARCHAR(100),
 	Tuoi INT,
 	GioiTinh NVARCHAR(10),
@@ -30,7 +30,7 @@ VALUES
 select * from NhanVien;
 
  CREATE TABLE Phong(
-	SoPhong NVARCHAR(20) NOT NULL,
+	SoPhong NVARCHAR(20) NOT NULL primary key,
     SoGiuong INT NOT NULL,
 	TienNghi NVARCHAR(100) NOT NULL,
 	TrangThai NVARCHAR(50) NOT NULL,
@@ -39,21 +39,21 @@ select * from NhanVien;
 
 INSERT INTO Phong (SoPhong, SoGiuong, TienNghi, TrangThai, GiaMacDinh)
 VALUES
-    ('101', 2, N'Điều hòa, Wifi, Tivi', N'Trống', 500000),
+    ('101', 2, N'Điều hòa, Wifi, Tivi', N'Đã đặt', 500000),
     ('102', 1, N'Điều hòa, Wifi', N'Trống', 300000),
     ('103', 3, N'Điều hòa, Wifi, Tivi, Tủ lạnh', N'Trống', 700000),
     ('104', 2, N'Wifi, Tivi', N'Đã đặt', 600000),
     ('105', 1, N'Điều hòa', N'Trống', 400000),
     ('106', 2, N'Điều hòa, Wifi', N'Trống', 450000),
-    ('107', 3, N'Điều hòa, Wifi, Tivi', N'Trống', 750000),
+    ('107', 3, N'Điều hòa, Wifi, Tivi', N'Đã đặt', 750000),
     ('108', 1, N'Wifi', N'Đã đặt', 350000),
-    ('109', 2, N'Điều hòa, Tủ lạnh', N'Trống', 550000),
+    ('109', 2, N'Điều hòa, Tủ lạnh', N'Đã đặt', 550000),
     ('110', 1, N'Điều hòa, Wifi, Tivi', N'Trống', 600000);
     
 select * from Phong where TrangThai=N'Trống';
 
 CREATE TABLE KhachHang(
-	CCCD VARCHAR(50) NOT NULL,
+	CCCD VARCHAR(50) NOT NULL primary key,
 	HoTen NVARCHAR(100) NOT NULL,
 	GioiTinh NVARCHAR(10) NOT NULL,
 	QuocTich NVARCHAR(50),
@@ -76,26 +76,55 @@ VALUES
 select * from KhachHang;
 
  CREATE TABLE HoaDon(
-	CCCD VARCHAR(50) NOT NULL,
-	SoPhong NVARCHAR(20),
+	MaHD VARCHAR(10) NOT NULL,
+	CCCD VARCHAR(50) NOT NULL ,
+	SoPhong NVARCHAR(20) NOT NULL,
 	NgayNhan DATETIME,
 	NgayTra DATETIME,
 	TrangThai NVARCHAR(50) NOT NULL DEFAULT N'Chưa thanh toán'
 );
+ALTER TABLE HoaDon
+ADD CONSTRAINT FK_HoaDon_KhachHang 
+FOREIGN KEY (CCCD) REFERENCES KhachHang(CCCD) ON DELETE CASCADE;
 
-INSERT INTO HoaDon (CCCD, SoPhong, NgayNhan, NgayTra, TrangThai)
+ALTER TABLE HoaDon
+ADD CONSTRAINT FK_HoaDon_Phong 
+FOREIGN KEY (SoPhong) REFERENCES Phong(SoPhong) ON DELETE CASCADE;
+
+INSERT INTO HoaDon (MaHD, CCCD, SoPhong, NgayNhan, NgayTra, TrangThai)
 VALUES
-    ('123456789012', 'P101', '2025-05-01', '2025-05-05', N'Đã thanh toán'),
-    ('234567890123', 'P102', '2025-05-02', '2025-05-03', N'Đã thanh toán'),
-    ('345678901234', 'P103', '2025-05-01', '2025-05-04', N'Chưa thanh toán'),
-    ('456789012345', 'P104', '2025-05-02', '2025-05-06', N'Đã thanh toán'),
-    ('567890123456', 'P105', '2025-05-01', '2025-05-07', N'Chưa thanh toán'),
-    ('678901234567', 'P106', '2025-05-03', '2025-05-06', N'Đã thanh toán'),
-    ('789012345678', 'P107', '2025-05-04', '2025-05-08', N'Chưa thanh toán'),
-    ('890123456789', 'P108', '2025-05-02', '2025-05-05', N'Đã thanh toán'),
-    ('901234567890', 'P109', '2025-05-01', '2025-05-09', N'Chưa thanh toán'),
-    ('012345678901', 'P110', '2025-05-03', '2025-05-07', N'Đã thanh toán');
+    ('HD001', '123456789012', '101', '2025-05-01 14:00:00', '2025-05-03 12:00:00', N'Chưa thanh toán'),
+    ('HD002', '234567890123', '102', '2025-05-02 15:00:00', '2025-05-04 11:00:00', N'Đã thanh toán'),
+    ('HD003', '345678901234', '103', '2025-05-03 13:30:00', '2025-05-05 10:30:00', N'Chưa thanh toán'),
+    ('HD004', '456789012345', '104', '2025-05-04 16:00:00', '2025-05-06 12:00:00', N'Đã thanh toán'),
+    ('HD005', '567890123456', '105', '2025-05-05 14:30:00', '2025-05-07 11:30:00', N'Chưa thanh toán'),
+    ('HD006', '678901234567', '106', '2025-05-06 17:00:00', '2025-05-08 12:30:00', N'Đã thanh toán'),
+    ('HD007', '789012345678', '107', '2025-05-07 15:00:00', '2025-05-09 10:00:00', N'Chưa thanh toán'),
+    ('HD008', '890123456789', '108', '2025-05-08 14:00:00', '2025-05-10 12:00:00', N'Đã thanh toán'),
+    ('HD009', '901234567890', '109', '2025-05-09 16:30:00', '2025-05-11 11:00:00', N'Chưa thanh toán'),
+    ('HD010', '012345678901', '110', '2025-05-10 13:00:00', '2025-05-12 10:30:00', N'Đã thanh toán');
 
 SELECT * FROM HoaDon;
+
+-- hàm tạo MaHD tự động
+DELIMITER //
+
+CREATE FUNCTION GenerateMaHD() RETURNS VARCHAR(10) 
+DETERMINISTIC
+BEGIN
+    DECLARE new_id INT;
+    DECLARE new_mahd VARCHAR(10);
+    
+    -- Lấy số lượng hóa đơn hiện có
+    SELECT COUNT(*) + 1 INTO new_id FROM HoaDon;
+    
+    -- Tạo mã hóa đơn mới bằng cách ghép tiền tố 'HD' với số lượng hóa đơn
+    SET new_mahd = CONCAT('HD', LPAD(new_id, 3, '0'));
+    
+    RETURN new_mahd;
+END //
+
+DELIMITER ;
+
 
 

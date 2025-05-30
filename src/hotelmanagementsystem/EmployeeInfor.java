@@ -68,10 +68,6 @@ public class EmployeeInfor extends JFrame implements ActionListener {
         this.setResizable(false);
     }
 
-    public static void main(String[] args) {
-        new EmployeeInfor();
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
         this.setVisible(false);

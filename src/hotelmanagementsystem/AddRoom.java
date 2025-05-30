@@ -122,10 +122,6 @@ public class AddRoom extends JFrame implements ActionListener {
         this.setResizable(false);
     }
 
-    public static void main(String[] args) {
-        new AddRoom();
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == add) {
