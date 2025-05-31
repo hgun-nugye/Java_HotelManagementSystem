@@ -193,33 +193,64 @@ public class AddCustomer extends JFrame implements ActionListener {
             String duaTruoc = jTextFieldDeposit.getText();
 
             try {
-                String query = "INSERT INTO KhachHang VALUES (?, ?, ?, ?, ?, ?, ?)";
-                String query2 = "UPDATE Phong SET TrangThai=N'Đã đặt' WHERE SoPhong=?";
-                String query3 = "INSERT INTO HoaDon VALUES (GenerateMaHD(),?,?, ?, NULL, N'Chưa Thanh toán')";
-
                 Connect conn = new Connect();
-                PreparedStatement pstmt = conn.c.prepareStatement(query);
-                pstmt.setString(1, cccd);
-                pstmt.setString(2, hoTen);
-                pstmt.setString(3, gioiTinh);
-                pstmt.setString(4, quocTich);
-                pstmt.setString(5, email);
-                pstmt.setString(6, sdt);
-                pstmt.setString(7, duaTruoc);
-                pstmt.executeUpdate();
 
+                // Kiểm tra xem CCCD đã tồn tại chưa
+                String checkQuery = "SELECT COUNT(*) FROM KhachHang WHERE CCCD = ?";
+                PreparedStatement checkStmt = conn.c.prepareStatement(checkQuery);
+                checkStmt.setString(1, cccd);
+                ResultSet rs = checkStmt.executeQuery();
+
+                rs.next();
+                int count = rs.getInt(1);
+
+                if (count > 0) {
+                    // Nếu CCCD đã tồn tại, cập nhật thông tin
+                    String updateQuery = "UPDATE KhachHang SET TenKH=?, GioiTinh=?, QuocTich=?, Email=?, SDT=?, DuaTruoc=? WHERE CCCD=?";
+                    PreparedStatement pstmt = conn.c.prepareStatement(updateQuery);
+                    pstmt.setString(1, hoTen);
+                    pstmt.setString(2, gioiTinh);
+                    pstmt.setString(3, quocTich);
+                    pstmt.setString(4, email);
+                    pstmt.setString(5, sdt);
+                    pstmt.setString(6, duaTruoc);
+                    pstmt.setString(7, cccd);
+                    pstmt.executeUpdate();
+
+                    JOptionPane.showMessageDialog(null, "Khách hàng đã tồn tại, thông tin được cập nhật");
+                } else {
+                    // Nếu CCCD chưa tồn tại, thêm mới khách hàng
+                    String insertQuery = "INSERT INTO KhachHang VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    PreparedStatement pstmt = conn.c.prepareStatement(insertQuery);
+                    pstmt.setString(1, cccd);
+                    pstmt.setString(2, hoTen);
+                    pstmt.setString(3, gioiTinh);
+                    pstmt.setString(4, quocTich);
+                    pstmt.setString(5, email);
+                    pstmt.setString(6, sdt);
+                    pstmt.setString(7, duaTruoc);
+                    pstmt.executeUpdate();
+
+                    JOptionPane.showMessageDialog(null, "Khách hàng mới đã được thêm");
+                }
+
+                // Cập nhật trạng thái phòng
+                String query2 = "UPDATE Phong SET TrangThai=N'Đã đặt' WHERE SoPhong=?";
                 PreparedStatement pstmt2 = conn.c.prepareStatement(query2);
                 pstmt2.setString(1, soPhong);
                 pstmt2.executeUpdate();
 
+                // Thêm hóa đơn
+                String query3 = "INSERT INTO HoaDon VALUES (GenerateMaHD(),?,?, ?, NULL, N'Chưa Thanh toán')";
                 PreparedStatement pstmt3 = conn.c.prepareStatement(query3);
-                pstmt2.setString(1, cccd);
+                pstmt3.setString(1, cccd);
                 pstmt3.setString(2, soPhong);
                 pstmt3.setString(3, checkin);
+                pstmt3.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "New Customer Added Successfully");
                 setVisible(false);
                 new Reception();
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
                 e.printStackTrace();
