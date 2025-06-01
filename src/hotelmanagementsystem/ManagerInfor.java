@@ -36,7 +36,16 @@ public class ManagerInfor extends JFrame implements ActionListener {
 
         try {
             Connect c = new Connect();
-            ResultSet rs = c.s.executeQuery("select * from NhanVien where ChucVu= N'Quản lý'");
+            ResultSet rs = c.s.executeQuery("SELECT e.CCCD," +
+                    "       e.HoTen AS 'Họ Tên'" +
+                    "       e.Tuoi AS 'Tuổi'," +
+                    "       e.GioiTinh AS 'Giới tính'," +
+                    "       e.ChucVu AS 'Chức vụ'," +
+                    "       e.Luong AS 'Lương'," +
+                    "       e.SDT_NV AS 'Số điện thoại'," +
+                    "       e.Email_NV AS 'Email'" +
+                    "FROM NhanVien e" +
+                    "WHERE e.ChucVu = 'Quản lý';");
             jTable.setModel(DbUtils.resultSetToTableModel(rs));
             jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
@@ -55,7 +64,7 @@ public class ManagerInfor extends JFrame implements ActionListener {
         }
 
         //back button section
-        back = new JButton("BACK");
+        back = new JButton("Quay lại");
         back.setBounds(420, 500, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);

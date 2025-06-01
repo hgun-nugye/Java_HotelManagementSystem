@@ -61,7 +61,7 @@ public class SearchRoom extends JFrame implements ActionListener {
         loadRoomData();
 
         // Submit button
-        submit = new JButton("SUBMIT");
+        submit = new JButton("Tìm");
         submit.setBounds(300, 500, 120, 30);
         submit.setBackground(Color.BLACK);
         submit.setForeground(Color.WHITE);
@@ -70,7 +70,7 @@ public class SearchRoom extends JFrame implements ActionListener {
         this.add(submit);
 
         // Back button
-        back = new JButton("BACK");
+        back = new JButton("Quay lại");
         back.setBounds(500, 500, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
@@ -86,16 +86,18 @@ public class SearchRoom extends JFrame implements ActionListener {
     private void loadRoomData() {
         try {
             Connect c = new Connect();
-            ResultSet rs = c.s.executeQuery("SELECT * FROM Phong");
+            ResultSet rs = c.s.executeQuery("select p.SoPhong as 'Số Phòng', p.SoGiuong as 'Số giường', " +
+                    "p.Tiennghi as 'Tiện nghi', p.TrangThai as 'Trạng thái', p.GiaMacDinh as 'Giá mặc định'" +
+                    "from Phong p;");
             jTable.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-            e.printStackTrace(); // Better error handling
+            e.printStackTrace();
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if ("SUBMIT".equals(event.getActionCommand())) {
+        if (event.getSource() == submit) {
             searchRooms();
         } else {
             this.setVisible(false);

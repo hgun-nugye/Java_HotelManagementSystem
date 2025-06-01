@@ -26,7 +26,7 @@ public class AddEmployee extends JFrame implements ActionListener {
 
         //IDNumber section
         JLabel jLabel_id = new JLabel("Số CCCD");
-        jLabel_id.setBounds(60, 30, 120, 30);
+        jLabel_id.setBounds(50, 30, 120, 30);
         jLabel_id.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_id);
 
@@ -36,7 +36,7 @@ public class AddEmployee extends JFrame implements ActionListener {
 
         //name section
         JLabel jLabel_name = new JLabel("Tên");
-        jLabel_name.setBounds(60, 80, 120, 30);
+        jLabel_name.setBounds(50, 80, 120, 30);
         jLabel_name.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_name);
 
@@ -46,7 +46,7 @@ public class AddEmployee extends JFrame implements ActionListener {
 
         //age section
         JLabel jLabel_age = new JLabel("Tuổi");
-        jLabel_age.setBounds(60, 130, 120, 30);
+        jLabel_age.setBounds(50, 130, 120, 30);
         jLabel_age.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_age);
 
@@ -56,7 +56,7 @@ public class AddEmployee extends JFrame implements ActionListener {
 
         //gender section
         JLabel jLabel_gender = new JLabel("Giới tính");
-        jLabel_gender.setBounds(60, 180, 120, 30);
+        jLabel_gender.setBounds(50, 180, 120, 30);
         jLabel_gender.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_gender);
 
@@ -78,7 +78,7 @@ public class AddEmployee extends JFrame implements ActionListener {
 
         //job section
         JLabel jLabel_job = new JLabel("Chức vụ");
-        jLabel_job.setBounds(60, 230, 120, 30);
+        jLabel_job.setBounds(50, 230, 120, 30);
         jLabel_job.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_job);
 
@@ -92,7 +92,7 @@ public class AddEmployee extends JFrame implements ActionListener {
 
         //salary section
         JLabel jLabel_salary = new JLabel("Lương");
-        jLabel_salary.setBounds(60, 280, 120, 30);
+        jLabel_salary.setBounds(50, 280, 120, 30);
         jLabel_salary.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_salary);
 
@@ -102,7 +102,7 @@ public class AddEmployee extends JFrame implements ActionListener {
 
         //phone section
         JLabel jLabel_phone = new JLabel("Số điện thoại");
-        jLabel_phone.setBounds(60, 330, 120, 30);
+        jLabel_phone.setBounds(50, 330, 120, 30);
         jLabel_phone.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_phone);
 
@@ -112,7 +112,7 @@ public class AddEmployee extends JFrame implements ActionListener {
 
         //email section
         JLabel jLabel_email = new JLabel("Email");
-        jLabel_email.setBounds(60, 380, 120, 30);
+        jLabel_email.setBounds(50, 380, 120, 30);
         jLabel_email.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.add(jLabel_email);
 
@@ -121,16 +121,16 @@ public class AddEmployee extends JFrame implements ActionListener {
         this.add(jTextField_email);
 
         //submit button
-        submit = new JButton("SUBMIT");
+        submit = new JButton("Thêm");
         submit.setBackground(Color.BLACK);
         submit.setForeground(Color.WHITE);
         submit.setBorderPainted(false);
-        submit.setBounds(70, 430, 150, 30);
+        submit.setBounds(50, 430, 150, 30);
         submit.addActionListener(this);
         this.add(submit);
 
         //back button
-        back = new JButton("BACK");
+        back = new JButton("Quay lại");
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         back.setBorderPainted(false);
@@ -155,7 +155,7 @@ public class AddEmployee extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if(event.getSource()==submit) {
+        if (event.getSource() == submit) {
             String name = jTextField_name.getText();
             String age = jTextField_age.getText();
             String salary = jTextField_salary.getText();
@@ -166,12 +166,12 @@ public class AddEmployee extends JFrame implements ActionListener {
             String gender = null;
 
             if (name.equals("")) {
-                JOptionPane.showMessageDialog(null, "Name should not be empty");
+                JOptionPane.showMessageDialog(null, "Tên không được để trống!");
                 return;
             }
 
             if (!(email.contains("@") && email.contains(".com"))) {
-                JOptionPane.showMessageDialog(null, "Email is not correct form");
+                JOptionPane.showMessageDialog(null, "Định dạng email không đúng.");
                 return;
             }
 
@@ -190,15 +190,15 @@ public class AddEmployee extends JFrame implements ActionListener {
                                 " " + "'" + job + "', '" + salary + "', '" + phone + "', '" + email + "')";
                 conn.s.executeUpdate(query);
 
-                JOptionPane.showMessageDialog(null, "Employee added successfully");
-
+                JOptionPane.showMessageDialog(null, "Thêm Nhân viên mới thành công!");
                 this.setVisible(false);
-                new Dashboard();
+                new AddEmployee();
+
             } catch (Exception e) {
                 e.printStackTrace();
 
             }
-        }else if(event.getSource()==back){
+        } else if (event.getSource() == back) {
             this.setVisible(false);
             new Dashboard();
         }

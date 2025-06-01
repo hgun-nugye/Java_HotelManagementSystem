@@ -112,7 +112,7 @@ public class Login extends JFrame implements ActionListener {
                     this.setVisible(false);
                     new Dashboard();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Invalid username or password");
+                    JOptionPane.showMessageDialog(null, "Tên người dùng? Mật khẩu không đúng.");
                     username.setText(""); // Clear username field
                     password.setText(""); // Clear password field
                 }

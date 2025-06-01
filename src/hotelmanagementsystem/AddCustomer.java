@@ -20,6 +20,7 @@ public class AddCustomer extends JFrame implements ActionListener {
     private final JLabel jLabelCheckinTime;
     private final Choice choiceRoom;
 
+
     public AddCustomer() {
         setLayout(null);
         setSize(800, 550);
@@ -123,7 +124,7 @@ public class AddCustomer extends JFrame implements ActionListener {
         add(choiceRoom);
 
         // Time Customer
-        JLabel jLabelTime = new JLabel("Checkin");
+        JLabel jLabelTime = new JLabel("Ngày vào");
         jLabelTime.setBounds(35, 360, 165, 20);
         jLabelTime.setFont(new Font("Tahoma", Font.BOLD, 17));
         add(jLabelTime);
@@ -148,7 +149,7 @@ public class AddCustomer extends JFrame implements ActionListener {
         add(jTextFieldDeposit);
 
         // Add Button
-        JButton addButton = new JButton("ADD");
+        JButton addButton = new JButton("Thêm");
         addButton.setBackground(Color.BLACK);
         addButton.setForeground(Color.WHITE);
         addButton.setBorderPainted(false);
@@ -157,7 +158,7 @@ public class AddCustomer extends JFrame implements ActionListener {
         add(addButton);
 
         // Back Button
-        JButton backButton = new JButton("BACK");
+        JButton backButton = new JButton("Quay lại");
         backButton.setBackground(Color.BLACK);
         backButton.setForeground(Color.WHITE);
         backButton.setBorderPainted(false);
@@ -181,7 +182,7 @@ public class AddCustomer extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getActionCommand().equals("ADD")) {
+        if (event.getActionCommand().equals("Thêm")) {
             String cccd = jTextFieldCCCD.getText();
             String hoTen = jTextFieldName.getText();
             String gioiTinh = rmale.isSelected() ? "Nam" : rfemale.isSelected() ? "Nữ" : null;
@@ -206,7 +207,7 @@ public class AddCustomer extends JFrame implements ActionListener {
 
                 if (count > 0) {
                     // Nếu CCCD đã tồn tại, cập nhật thông tin
-                    String updateQuery = "UPDATE KhachHang SET TenKH=?, GioiTinh=?, QuocTich=?, Email=?, SDT=?, DuaTruoc=? WHERE CCCD=?";
+                    String updateQuery = "UPDATE KhachHang SET HoTen=?, GioiTinh=?, QuocTich=?, Email=?, SDT=?, DuaTruoc=? WHERE CCCD=?";
                     PreparedStatement pstmt = conn.c.prepareStatement(updateQuery);
                     pstmt.setString(1, hoTen);
                     pstmt.setString(2, gioiTinh);
@@ -217,7 +218,7 @@ public class AddCustomer extends JFrame implements ActionListener {
                     pstmt.setString(7, cccd);
                     pstmt.executeUpdate();
 
-                    JOptionPane.showMessageDialog(null, "Khách hàng đã tồn tại, thông tin được cập nhật");
+                    JOptionPane.showMessageDialog(null, "Khách hàng đã tồn tại, thông tin đã được cập nhật!");
                 } else {
                     // Nếu CCCD chưa tồn tại, thêm mới khách hàng
                     String insertQuery = "INSERT INTO KhachHang VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -231,7 +232,7 @@ public class AddCustomer extends JFrame implements ActionListener {
                     pstmt.setString(7, duaTruoc);
                     pstmt.executeUpdate();
 
-                    JOptionPane.showMessageDialog(null, "Khách hàng mới đã được thêm");
+                    JOptionPane.showMessageDialog(null, "Thêm Khách hàng thành công!");
                 }
 
                 // Cập nhật trạng thái phòng
@@ -255,7 +256,7 @@ public class AddCustomer extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
                 e.printStackTrace();
             }
-        } else if (event.getActionCommand().equals("BACK")) {
+        } else if (event.getActionCommand().equals("Quay lại")) {
             setVisible(false);
             new Reception();
         }

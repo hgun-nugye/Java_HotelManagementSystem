@@ -35,7 +35,10 @@ public class EmployeeInfor extends JFrame implements ActionListener {
 
         try {
             Connect c = new Connect();
-            ResultSet rs = c.s.executeQuery("select * from NhanVien");
+            ResultSet rs = c.s.executeQuery("select e.CCCD, e.HoTen as \"Họ Tên\",e.Tuoi as 'Tuổi', " +
+                    "e.GioiTinh as \"Giới tính\", e.ChucVu as \"Chức vụ\", e. Luong as 'Lương', \n" +
+                    "e.SDT_NV as \"Số điện thoại\", e.Email_NV as \"Email\"\n" +
+                    "from NhanVien e;");
             jTable.setModel(DbUtils.resultSetToTableModel(rs));
 
             // Chỉnh kích thước cột
@@ -53,7 +56,7 @@ public class EmployeeInfor extends JFrame implements ActionListener {
         }
 
         // Back button section
-        back = new JButton("BACK");
+        back = new JButton("Quay lại");
         back.setBounds(420, 500, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);

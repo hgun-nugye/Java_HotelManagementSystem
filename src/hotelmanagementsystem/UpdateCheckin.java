@@ -20,7 +20,7 @@ public class UpdateCheckin extends JFrame implements ActionListener {
         this.getContentPane().setBackground(Color.white);
         this.setSize(950, 500);
         this.setLayout(null);
-        this.setTitle("Update Checkout");
+        this.setTitle("Update Checkin");
 
         // Text heading
         JLabel text = new JLabel("CẬP NHẬT CHECKIN");
@@ -118,7 +118,7 @@ public class UpdateCheckin extends JFrame implements ActionListener {
         this.add(tfpending);
 
         // Check Button
-        check = new JButton("CHECK");
+        check = new JButton("Check");
         check.setBackground(Color.BLACK);
         check.setForeground(Color.WHITE);
         check.setBorderPainted(false);
@@ -127,7 +127,7 @@ public class UpdateCheckin extends JFrame implements ActionListener {
         this.add(check);
 
         // Update Button
-        update = new JButton("UPDATE");
+        update = new JButton("Cập nhật");
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
         update.setBorderPainted(false);
@@ -136,7 +136,7 @@ public class UpdateCheckin extends JFrame implements ActionListener {
         this.add(update);
 
         // Back Button
-        back = new JButton("BACK");
+        back = new JButton("Quay lại");
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         back.setBorderPainted(false);
@@ -182,17 +182,16 @@ public class UpdateCheckin extends JFrame implements ActionListener {
         } else if (event.getSource() == update) {
             String cccd = CCCD.getSelectedItem();
             String room = tfroom.getText();
+            String maHD=textmaHD.getText();
             String name = tfname.getText();
-            String checkin = jlbcheckin.getText();
             String deposit = tfpaid.getText();
 
             try {
                 Connect c = new Connect();
                 c.s.executeUpdate("UPDATE KhachHang SET HoTen='" + name + "', DuaTruoc='" + deposit + "' WHERE CCCD='" + cccd + "'");
-                c.s.executeUpdate("UPDATE HoaDon SET NgayNhan='" + checkin + "' WHERE CCCD='" + cccd + "'");
-                c.s.executeUpdate("UPDATE Phong SET SoPhong='" + room + "' WHERE SoPhong='" + room + "'");
+                c.s.executeUpdate("UPDATE HoaDon SET SoPhong='" + room + "' WHERE MaHD='" + maHD + "'");
 
-                JOptionPane.showMessageDialog(null, "Data Updated Successfully");
+                JOptionPane.showMessageDialog(null, "Cập nhật thông tin Checkin thành công!");
                 this.setVisible(false);
                 new Reception();
 
@@ -204,4 +203,5 @@ public class UpdateCheckin extends JFrame implements ActionListener {
             new Reception();
         }
     }
+
 }

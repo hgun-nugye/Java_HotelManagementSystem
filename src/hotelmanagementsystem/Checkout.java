@@ -17,6 +17,7 @@ public class Checkout extends JFrame implements ActionListener {
     private final JButton checkout;
     private final JButton back;
 
+
     public Checkout() {
         this.getContentPane().setBackground(Color.white);
         this.setSize(850, 400);
@@ -97,7 +98,7 @@ public class Checkout extends JFrame implements ActionListener {
         loadCustomers();
 
         // Checkout Button
-        checkout = new JButton("CHECKOUT");
+        checkout = new JButton("Checkout");
         checkout.setBackground(Color.BLACK);
         checkout.setForeground(Color.WHITE);
         checkout.setBorderPainted(false);
@@ -106,7 +107,7 @@ public class Checkout extends JFrame implements ActionListener {
         this.add(checkout);
 
         // Back Button
-        back = new JButton("BACK");
+        back = new JButton("Quay lại");
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         back.setBorderPainted(false);
@@ -127,10 +128,15 @@ public class Checkout extends JFrame implements ActionListener {
         this.setResizable(false);
     }
 
+    public static void main(String[] args) {
+        new Checkout();
+    }
+
     private void loadCustomers() {
         try {
             Connect c = new Connect();
-            ResultSet rs = c.s.executeQuery("SELECT * FROM KhachHang");
+            ResultSet rs = c.s.executeQuery("select * from KhachHang join HoaDon on HoaDon.CCCD=KhachHang.CCCD " +
+                    "where HoaDon.TrangThai='Chưa thanh toán';");
             while (rs.next()) {
                 CCCD.add(rs.getString("CCCD"));
             }
@@ -165,9 +171,8 @@ public class Checkout extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == checkout) {
-            String selectedCCCD = CCCD.getSelectedItem();
             String queryUpdateRoom = "UPDATE Phong SET TrangThai='Trống' WHERE SoPhong = ?";
-            String queryUpdateBill = "UPDATE HoaDon SET NgayTra=? WHERE SoPhong = ?";
+            String queryUpdateBill = "UPDATE HoaDon SET NgayTra=? WHERE SoPhong = ? and TrangThai=N'Chưa thanh toán' ";
 
             try {
                 Connect c = new Connect();
@@ -181,9 +186,9 @@ public class Checkout extends JFrame implements ActionListener {
                 pstmtUpdateBill.setString(2, jtext_room.getText());
                 pstmtUpdateBill.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "Checkout Successfully!");
+                JOptionPane.showMessageDialog(null, "Checkout thành công!");
                 this.setVisible(false);
-                new Reception();
+                new Checkout();
             } catch (Exception e) {
                 e.printStackTrace();
             }

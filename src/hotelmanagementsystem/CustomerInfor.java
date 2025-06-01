@@ -35,9 +35,11 @@ public class CustomerInfor extends JFrame implements ActionListener {
 
         try {
             Connect c = new Connect();
-            ResultSet rs = c.s.executeQuery("select KH.CCCD, KH.HoTen, KH.GioiTinh, KH.QuocTich, KH.SDT_KH, " +
-                    "P.SoPhong, HD.NgayNhan, KH.DuaTruoc from HoaDon HD join KhachHang KH on KH.CCCD=HD.CCCD " +
-                    "join Phong P on P.SoPhong= HD.SoPhong");
+            ResultSet rs = c.s.executeQuery("select KH.CCCD, KH.HoTen as 'Họ Tên', KH.GioiTinh as 'Giới tính',  " +
+                    "KH.QuocTich as 'Quốc tịch', KH.SDT_KH as 'Số điện thoại'," +
+                    "P.SoPhong as 'Số Phòng', HD.NgayNhan as 'Ngày Nhận', KH.DuaTruoc as 'Đưa trước'" +
+                    " from HoaDon HD join KhachHang KH on KH.CCCD=HD.CCCD" +
+                    " join Phong P on P.SoPhong= HD.SoPhong;");
             jTable.setModel(DbUtils.resultSetToTableModel(rs));
             jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
@@ -57,7 +59,7 @@ public class CustomerInfor extends JFrame implements ActionListener {
         }
 
         // Back button section
-        back = new JButton("BACK");
+        back = new JButton("Quay lại");
         back.setBounds(420, 500, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);

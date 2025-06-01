@@ -43,7 +43,9 @@ public class Room extends JFrame implements ActionListener {
 
         try {
             Connect c = new Connect();
-            ResultSet rs = c.s.executeQuery("select * from Phong");
+            ResultSet rs = c.s.executeQuery("select p.SoPhong as 'Số Phòng', p.SoGiuong as 'Số giường', " +
+                    "p.Tiennghi as 'Tiện nghi', p.TrangThai as 'Trạng thái', p.GiaMacDinh as 'Giá mặc định'" +
+                    "from Phong p;");
             jTable.setModel(DbUtils.resultSetToTableModel(rs));
 
             // Chỉnh kích thước cột
@@ -59,7 +61,7 @@ public class Room extends JFrame implements ActionListener {
         }
 
         //back button section
-        back = new JButton("BACK");
+        back = new JButton("Quay lại");
         back.setBounds(280, 500, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
