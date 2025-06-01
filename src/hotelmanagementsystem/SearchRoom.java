@@ -13,6 +13,7 @@ public class SearchRoom extends JFrame implements ActionListener {
     private final JButton back;
     private final JButton submit;
     private final JTextField jTextField_bed;
+    private final JButton reset;
     private JTable jTable;
     private JCheckBox available;
 
@@ -47,14 +48,14 @@ public class SearchRoom extends JFrame implements ActionListener {
         // JTable setup
         jTable = new JTable();
         jTable.setRowHeight(30);
-        jTable.setBounds(50, 150, 900, 300); // Adjusted to fit the frame
+        jTable.setBounds(50, 150, 900, 300);
         DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
         leftRenderer.setHorizontalAlignment(JLabel.LEFT);
         jTable.setDefaultRenderer(Object.class, leftRenderer);
         jTable.setGridColor(Color.GRAY);
 
         JScrollPane scrollPane = new JScrollPane(jTable);
-        scrollPane.setBounds(50, 150, 900, 300); // Adjusted to fit the frame
+        scrollPane.setBounds(50, 150, 900, 300);
         this.add(scrollPane);
 
         // Load room data into JTable
@@ -62,7 +63,7 @@ public class SearchRoom extends JFrame implements ActionListener {
 
         // Submit button
         submit = new JButton("Tìm");
-        submit.setBounds(300, 500, 120, 30);
+        submit.setBounds(200, 500, 120, 30);
         submit.setBackground(Color.BLACK);
         submit.setForeground(Color.WHITE);
         submit.setBorderPainted(false);
@@ -71,16 +72,29 @@ public class SearchRoom extends JFrame implements ActionListener {
 
         // Back button
         back = new JButton("Quay lại");
-        back.setBounds(500, 500, 120, 30);
+        back.setBounds(400, 500, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         back.setBorderPainted(false);
         back.addActionListener(this);
         this.add(back);
 
+        // Back button
+        reset = new JButton("Reset");
+        reset.setBounds(600, 500, 120, 30);
+        reset.setBackground(Color.BLACK);
+        reset.setForeground(Color.WHITE);
+        reset.setBorderPainted(false);
+        reset.addActionListener(this);
+        this.add(reset);
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new SearchRoom();
     }
 
     private void loadRoomData() {
@@ -99,9 +113,13 @@ public class SearchRoom extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == submit) {
             searchRooms();
-        } else {
+        } else if( event.getSource() == back) {
             this.setVisible(false);
             new Reception();
+        } else if (event.getSource() == reset) {
+            jTextField_bed.setText("");
+            available.setSelected(false);
+            loadRoomData();
         }
     }
 

@@ -57,6 +57,10 @@ public class Dashboard extends JFrame implements ActionListener {
         addrooms.addActionListener(this);
         admin.add(addrooms);
 
+        JMenuItem totalCost = new JMenuItem("REVENUE");
+        totalCost.addActionListener(this);
+        admin.add(totalCost);
+
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -71,6 +75,9 @@ public class Dashboard extends JFrame implements ActionListener {
         } else if (e.getActionCommand().equals("ADD ROOM")) {
             this.setVisible(false);
             new Admin("ADD ROOM");
+        } else if (e.getActionCommand().equals("REVENUE")) {
+            this.setVisible(false);
+            new Admin("REVENUE");
         } else if (e.getActionCommand().equals("RECEPTION")) {
             this.setVisible(false);
             new Reception();

@@ -91,8 +91,7 @@ public class Admin extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-    }
-
+}
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == login) {
@@ -113,11 +112,17 @@ public class Admin extends JFrame implements ActionListener {
                     // Hide this section and show dashboard
                     this.setVisible(false);
                     if (nextForm.equals("ADD EMPLOYEE")) {
-                        new AddEmployee(); // Show Add Employee form
+                        this.dispose();
+                        new AddEmployee();
                     } else if (nextForm.equals("ADD ROOM")) {
-                        new AddRoom(); // Show Add Room form
+                        this.dispose();
+                        new AddRoom();
+                    } else if (nextForm.equals("REVENUE")) {
+                        this.dispose();
+                        new Revenue();
                     } else {
-                        new Dashboard(); // Default to Dashboard
+                        this.dispose();
+                        new Dashboard();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Tên người dùng? Mật khẩu không đúng.");
@@ -128,7 +133,8 @@ public class Admin extends JFrame implements ActionListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (event.getSource() == cancel) {
+        }
+        else if (event.getSource() == cancel) {
             this.setVisible(false);
             new Dashboard();
         }

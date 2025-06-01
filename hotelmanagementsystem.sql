@@ -76,7 +76,6 @@ VALUES
 	('890123456789', '0989012345', N'Nữ', N'Lý Thị Mai', N'Việt Nam', 'lythimai@gmail.com'),
 	('901234567890', '0990123456', N'Nam', N'Trương Văn Phúc',  N'Việt Nam', 'truongvanphuc@gmail.com'),
 	('012345678901', '0901234567', N'Nữ', N'Đặng Kim Ngân',N'Việt Nam', 'dangkimngan@gmail.com');
-select * from KhachHang join HoaDon on HoaDon.CCCD=KhachHang.CCCD where HoaDon.TrangThai='Chưa thanh toán';
 
  CREATE TABLE HoaDon(
 	MaHD VARCHAR(10) NOT NULL,
@@ -106,7 +105,7 @@ VALUES
     ('HD008', '890123456789', '108', '2025-05-08 14:00:00', '2025-05-10 12:00:00', N'Đã thanh toán'),
     ('HD009', '901234567890', '109', '2025-05-09 16:30:00', '2025-05-11 11:00:00', N'Chưa thanh toán'),
     ('HD010', '012345678901', '110', '2025-05-10 13:00:00', '2025-05-12 10:30:00', N'Đã thanh toán');
-
+    
 SELECT * FROM HoaDon;
 
 -- hàm tạo MaHD tự động

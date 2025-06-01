@@ -207,7 +207,7 @@ public class AddCustomer extends JFrame implements ActionListener {
 
                 if (count > 0) {
                     // Nếu CCCD đã tồn tại, cập nhật thông tin
-                    String updateQuery = "UPDATE KhachHang SET HoTen=?, GioiTinh=?, QuocTich=?, Email=?, SDT=?, DuaTruoc=? WHERE CCCD=?";
+                    String updateQuery = "UPDATE KhachHang SET HoTen=?, GioiTinh=?, QuocTich=?, Email_KH=?, SDT=?, DuaTruoc=? WHERE CCCD=?";
                     PreparedStatement pstmt = conn.c.prepareStatement(updateQuery);
                     pstmt.setString(1, hoTen);
                     pstmt.setString(2, gioiTinh);
