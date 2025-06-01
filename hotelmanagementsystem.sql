@@ -1,7 +1,10 @@
 create database hotelmanagementsystem;
 use hotelmanagementsystem;
 create table login (username varchar(25), password varchar(25));
-insert into login values("admin", "1234");
+insert into login values("reception", "1234");
+
+create table administrator (username varchar(25), password varchar(25));
+insert into administrator values("admin", "1234");
 select * from login;
 
 CREATE TABLE NhanVien(
@@ -36,7 +39,7 @@ select * from NhanVien;
 	TrangThai NVARCHAR(50) NOT NULL,
 	GiaMacDinh INT NOT NULL
  );
-
+                   
 INSERT INTO Phong (SoPhong, SoGiuong, TienNghi, TrangThai, GiaMacDinh)
 VALUES
     ('101', 2, N'Điều hòa, Wifi, Tivi', N'Đã đặt', 500000),
@@ -73,7 +76,7 @@ VALUES
 	('890123456789', '0989012345', N'Nữ', N'Lý Thị Mai', N'Việt Nam', 'lythimai@gmail.com'),
 	('901234567890', '0990123456', N'Nam', N'Trương Văn Phúc',  N'Việt Nam', 'truongvanphuc@gmail.com'),
 	('012345678901', '0901234567', N'Nữ', N'Đặng Kim Ngân',N'Việt Nam', 'dangkimngan@gmail.com');
-select * from KhachHang;
+select * from KhachHang join HoaDon on HoaDon.CCCD=KhachHang.CCCD where HoaDon.TrangThai='Chưa thanh toán';
 
  CREATE TABLE HoaDon(
 	MaHD VARCHAR(10) NOT NULL,
@@ -125,7 +128,4 @@ BEGIN
 END //
 
 DELIMITER ;
-
-select hd.MaHD as "Mã Hóa đơn", hd.CCCD, hd.SoPhong as "Số Phòng", hd.NgayNhan as "Ngày Nhận", hd.NgayTra as "Ngày Trả", format(datediff(hd.NgayTra, hd.NgayNhan)*p.GiaMacDinh,0) as 'Tổng Tiền' from HoaDon hd join Phong p on p.SoPhong=hd.SoPhong;
-
 

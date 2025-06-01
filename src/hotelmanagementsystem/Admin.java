@@ -9,17 +9,19 @@ import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class Login extends JFrame implements ActionListener {
+public class Admin extends JFrame implements ActionListener {
     private final JTextField username;
     private final JPasswordField password;
-    private final JButton login;
     private final JButton cancel;
+    private final String nextForm;
+    private final JButton login;
 
-    public Login() {
+    public Admin(String nextForm) {
+        this.nextForm = nextForm; // Store the next form to be displayed after successful login
         this.getContentPane().setBackground(Color.white);
         this.setSize(600, 300);
         this.setLayout(null);
-        this.setTitle("Login");
+        this.setTitle("Admin");
 
         // Username section
         JLabel user = new JLabel("Username");
@@ -58,7 +60,7 @@ public class Login extends JFrame implements ActionListener {
             }
         });
 
-        // Login button
+        // login button
         login = new JButton("Login");
         login.setBounds(40, 150, 120, 40);
         login.setFont(new Font("Arial", Font.BOLD, 15));
@@ -100,7 +102,7 @@ public class Login extends JFrame implements ActionListener {
             try {
                 Connect c = new Connect();
 
-                String query = "SELECT * FROM login WHERE username = ? AND password = ?";
+                String query = "SELECT * FROM Administrator WHERE username = ? AND password = ?";
                 PreparedStatement pstmt = c.c.prepareStatement(query);
                 pstmt.setString(1, user);
                 pstmt.setString(2, pass);
@@ -110,7 +112,13 @@ public class Login extends JFrame implements ActionListener {
                 if (rs.next()) {
                     // Hide this section and show dashboard
                     this.setVisible(false);
-                    new Dashboard();
+                    if (nextForm.equals("ADD EMPLOYEE")) {
+                        new AddEmployee(); // Show Add Employee form
+                    } else if (nextForm.equals("ADD ROOM")) {
+                        new AddRoom(); // Show Add Room form
+                    } else {
+                        new Dashboard(); // Default to Dashboard
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Tên người dùng? Mật khẩu không đúng.");
                     username.setText(""); // Clear username field
@@ -122,7 +130,7 @@ public class Login extends JFrame implements ActionListener {
             }
         } else if (event.getSource() == cancel) {
             this.setVisible(false);
-            new HotelManagementSystem();
+            new Dashboard();
         }
     }
 }

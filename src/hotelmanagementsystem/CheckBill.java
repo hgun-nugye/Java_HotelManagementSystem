@@ -14,6 +14,8 @@ public class CheckBill extends JFrame implements ActionListener {
 
     public CheckBill() throws HeadlessException {
         this.getContentPane().setBackground(Color.white);
+        this.setForeground(Color.BLACK);
+        this.setFont(new Font("Tahoma", Font.PLAIN, 16));
         this.setSize(1200, 600);
         this.setLayout(null);
         this.setTitle("Statistics Bill ");
