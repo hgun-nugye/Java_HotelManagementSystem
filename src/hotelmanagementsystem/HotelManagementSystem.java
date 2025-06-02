@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 
 public class HotelManagementSystem extends JFrame implements ActionListener {
 
-    private final JLabel text; // Declare text label as a class variable
-
     public HotelManagementSystem() {
         this.setSize(900, 545);
         this.setLocationRelativeTo(null);
@@ -16,7 +14,7 @@ public class HotelManagementSystem extends JFrame implements ActionListener {
         this.setTitle("HOTEL MANAGEMENT SYSTEM");
 
         // Add text title
-        text = new JLabel("<html>HOTEL <br><br>MANAGEMENT<br> <br>SYSTEM</html>");
+        JLabel text = new JLabel("<html>HOTEL <br><br>MANAGEMENT<br> <br>SYSTEM</html>");
         Font font = new Font("Tahoma", Font.BOLD, 50);
         text.setBounds(50, 100, 900, 300);
         text.setFont(font);
@@ -62,6 +60,6 @@ public class HotelManagementSystem extends JFrame implements ActionListener {
         // Hide welcome window when clicking Next button
         this.setVisible(false);
         // Show login when clicking Next button
-        new Login();
+        new Dashboard();
     }
 }

@@ -39,6 +39,7 @@ public class CheckBill extends JFrame implements ActionListener {
             Connect c = new Connect();
             ResultSet rs = c.s.executeQuery("select hd.MaHD as \"Mã Hóa đơn\", hd.CCCD, hd.SoPhong as \"Số Phòng\"," +
                     "hd.NgayNhan as \"Ngày Nhận\", hd.NgayTra as \"Ngày Trả\", " +
+                    "hd.TrangThai as \"Trạng Thái\", " +
                     "format(datediff(hd.NgayTra, hd.NgayNhan)*p.GiaMacDinh,0) " +
                     "as 'Tổng Tiền' from HoaDon hd join Phong p on p.SoPhong=hd.SoPhong;");
             jTable.setModel(DbUtils.resultSetToTableModel(rs));

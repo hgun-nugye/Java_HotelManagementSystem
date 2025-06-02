@@ -93,10 +93,6 @@ public class SearchRoom extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new SearchRoom();
-    }
-
     private void loadRoomData() {
         try {
             Connect c = new Connect();

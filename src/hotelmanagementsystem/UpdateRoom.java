@@ -144,6 +144,10 @@ public class UpdateRoom extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    public static void main(String[] args) {
+        new   UpdateRoom();
+    }
+
     @Override
     public void actionPerformed(ActionEvent event) {
         String id = roomNumber.getSelectedItem().toString();

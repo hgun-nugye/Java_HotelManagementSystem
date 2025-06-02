@@ -172,10 +172,6 @@ public class Reception extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new Reception();
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == newCustomer) {

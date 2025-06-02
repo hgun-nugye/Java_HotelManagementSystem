@@ -110,7 +110,7 @@ public class Login extends JFrame implements ActionListener {
                 if (rs.next()) {
                     // Hide this section and show dashboard
                     this.setVisible(false);
-                    new Dashboard();
+                    new Reception();
                 } else {
                     JOptionPane.showMessageDialog(null, "Tên người dùng? Mật khẩu không đúng.");
                     username.setText(""); // Clear username field
@@ -122,7 +122,7 @@ public class Login extends JFrame implements ActionListener {
             }
         } else if (event.getSource() == cancel) {
             this.setVisible(false);
-            new HotelManagementSystem();
+            new Dashboard();
         }
     }
 }

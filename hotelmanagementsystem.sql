@@ -5,7 +5,6 @@ insert into login values("reception", "1234");
 
 create table administrator (username varchar(25), password varchar(25));
 insert into administrator values("admin", "1234");
-select * from login;
 
 CREATE TABLE NhanVien(
 	CCCD VARCHAR(50) primary key,
@@ -30,7 +29,6 @@ VALUES
     ('889900112233', N'Trần Minh Khôi', 35, N'Nam', N'Bảo vệ', '0988990011', 'tranminhkhoi@hotel.com', 9000000),
     ('990011223344', N'Lý Thị Mai', 24, N'Nữ', N'Kế toán', '0999001122', 'lythimai@hotel.com', 15000000),
     ('001122334455', N'Đặng Văn Nam', 40, N'Nam', N'Quản lý', '0900112233', 'dangvannam@hotel.com', 20000000);
-select * from NhanVien;
 
  CREATE TABLE Phong(
 	SoPhong NVARCHAR(20) NOT NULL primary key,
@@ -52,8 +50,6 @@ VALUES
     ('108', 1, N'Wifi', N'Đã đặt', 350000),
     ('109', 2, N'Điều hòa, Tủ lạnh', N'Đã đặt', 550000),
     ('110', 1, N'Điều hòa, Wifi, Tivi', N'Trống', 600000);
-    
-select * from Phong where TrangThai=N'Trống';
 
 CREATE TABLE KhachHang(
 	CCCD VARCHAR(50) NOT NULL primary key,
@@ -64,6 +60,7 @@ CREATE TABLE KhachHang(
     SDT_KH VARCHAR(15), 
     DuaTruoc INT  default (0)
  );
+ 
 INSERT INTO KhachHang (CCCD, SDT_KH, GioiTinh, HoTen, QuocTich, Email_KH)
 VALUES
 	('123456789012', '0912345678', N'Nam', N'Nguyễn Văn An',N'Việt Nam', 'nguyenvanan@gmail.com'),

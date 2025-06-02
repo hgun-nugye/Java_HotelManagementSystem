@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Connect {
-    Connection c;
-    Statement s;
+    public Connection c;
+    public Statement s;
 
     public Connect() {
         try {

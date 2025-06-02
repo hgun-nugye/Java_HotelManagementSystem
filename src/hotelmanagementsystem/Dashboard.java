@@ -80,11 +80,7 @@ public class Dashboard extends JFrame implements ActionListener {
             new Admin("REVENUE");
         } else if (e.getActionCommand().equals("RECEPTION")) {
             this.setVisible(false);
-            new Reception();
+            new Login();
         }
-    }
-
-    public static void main(String[] args) {
-        new Dashboard();
     }
 }

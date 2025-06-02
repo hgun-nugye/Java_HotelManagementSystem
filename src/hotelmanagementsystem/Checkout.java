@@ -128,10 +128,6 @@ public class Checkout extends JFrame implements ActionListener {
         this.setResizable(false);
     }
 
-    public static void main(String[] args) {
-        new Checkout();
-    }
-
     private void loadCustomers() {
         try {
             Connect c = new Connect();
