@@ -84,7 +84,7 @@ public class Revenue extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == back) {
             this.setVisible(false);
-            new Reception();
+            new Dashboard();
         } else if (event.getSource() == choiceRoom) {
             if (choiceRoom.getSelectedItem().equals("Ngày")) {
                 try {

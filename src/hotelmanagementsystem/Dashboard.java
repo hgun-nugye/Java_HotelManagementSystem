@@ -13,7 +13,7 @@ public class Dashboard extends JFrame implements ActionListener {
 
         //set text title
         JLabel text = new JLabel("WELCOME TO LARANA HOTEL");
-        text.setBounds(120, 120, 1200, 80);
+        text.setBounds(220, 120, 1200, 80);
         text.setFont(new Font("Tahoma", Font.BOLD, 70));
         text.setForeground(Color.decode("#4b3808"));
         this.add(text);
